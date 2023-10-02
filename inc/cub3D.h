@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:19:28 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/02 14:20:11 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:21:16 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_position
     int y;
 }   t_pos;
 
-typedef struct t_parsing
+typedef struct s_parsing
 {
     char *north;
     char *south;
@@ -33,12 +33,13 @@ typedef struct t_parsing
     char *west;
     t_pos *player_pos;
     
-} s_parsing;
+} t_parsing;
 
-typedef struct t_global
+
+typedef struct s_global
 {
     s_parsing *parsing;
-} s_global;
+} t_global;
 
 // prototype
 
