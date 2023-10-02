@@ -6,7 +6,7 @@
 #    By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 14:37:15 by oboucher         ###   ########.fr        #
+#    Updated: 2023/10/02 14:51:11 by oboucher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 #--- RULES ---#
 $(OBJDIR)/%.o:	%.c
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INCDIR) -I. -c $< -o $@
 	
 all:	mlx42 libft $(NAME)
