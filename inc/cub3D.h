@@ -28,7 +28,7 @@ typedef struct s_parsing
 
 typedef struct s_global
 {
-    t_parsing *parsing;
+    t_parsing parsing;
 } t_global;
 
 // prototype
@@ -42,6 +42,7 @@ size_t char_count(char *str, char c);
 //----------------------//
 // ------PARSING--------//
 //----------------------//
+void    pars_map(char *map);
 
 //----------------------//
 // -------GRAPHICS------//

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+         #
+#    By: acouture <acouture@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 13:04:56 by oboucher         ###   ########.fr        #
+#    Updated: 2023/10/02 14:36:27 by acouture         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT = libft.a
 
 #--- COMMAND VARIABLES ---#
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 AR = ar rcs
 MK = mkdir -p
@@ -36,7 +36,8 @@ INCDIR = inc
 #--- SOURCE ---#
 SRCDIR = src
 
-SRC =	parsing/readmap.c utilities/string.c
+SRC =	main.c parsing/open_read.c utilities/string.c
+
 
 VPATH	=	${SRCDIR}
 
