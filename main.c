@@ -1,4 +1,13 @@
-int main(int ac, char **av) 
+
+#include "inc/cub3D.h"
+
+s_global	*g(void)
 {
-    return (0);
+    static global;
+    return (&global);
+}
+
+int	main(int ac, char **av)
+{
+	return (0);
 }
