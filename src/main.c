@@ -3,14 +3,52 @@
 
 t_global	*g(void)
 {
-    static t_global global;
-    return (&global);
+	static t_global	global;
+
+	return (&global);
+}
+
+void	check_extension(char *map)
+{
+	int	i;
+
+	i = ft_strlen(map) - 4;
+	if (ft_strncmp(&map[i], ".cub", 4) != 0)
+		ft_exit("Wrong type of file");
+}
+
+void	ft_2darr_free(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void	ft_2darr_print(char **tb, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (tb[i])
+	{
+		ft_putstr_fd(tb[i], fd);
+		i++;
+	}
 }
 
 int	main(int ac, char **av)
 {
-    if (ac != 2)
-        ft_exit("Wrong Number of Arguments");
-    pars_map(av[1]);
+	if (ac != 2)
+		ft_exit("Wrong number of arguments");
+	check_extension(av[1]);
+	pars_map(av[1]);
 	return (0);
 }

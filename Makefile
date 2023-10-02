@@ -1,18 +1,12 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: acouture <acouture@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 14:36:27 by acouture         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+
+# ➜  ~ git clone https://github.com/codam-coding-college/MLX42.git
+# ➜  ~ cd MLX42
+# ➜  ~ cmake -B build # build here refers to the outputfolder.
+# ➜  ~ cmake --build build -j4 # or do make -C build -j4
 
 #--- LIBRARY NAME ---#
 NAME = cub3D
-LDIR = libft_/
+LDIR = lib/libft_/
 LIBFT = libft.a
 
 #--- COMMAND VARIABLES ---#
@@ -22,60 +16,69 @@ RM = rm -f
 AR = ar rcs
 MK = mkdir -p
 
+#--- MLX42 CODAM ---#
+MLXDIR = lib/MLX42_/build/
+MLXA = libmlx42.a
+MLX = $(MLXDIR)$(MLXA)
+MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" #"/usr/local/opt/glfw/lib"
+
 #--- COLORS ---#
 GREEN	=	\033[1;32m
 RED		=	\033[1;31m
-BLUE	=	\033[1;34m
-YELLOW	=	\033[1;93m
-WHITE	=	\033[1;97m
 RESET 	= 	\033[0m
 
 #--- INCLUDE ---#
 INCDIR = inc
 
 #--- SOURCE ---#
-SRCDIR = src
-
-SRC =	main.c parsing/open_read.c utilities/string.c
-
-
-VPATH	=	${SRCDIR}
+SRCDIR	=	src
+SRC		= 	main.c \
+			utilities/free.c \
+			utilities/string.c \
+			parsing/open_read.c \
+			parsing/find_nswe.c \
+			parsing/find_colors.c \
+			parsing/flood_map.c 
+VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
 OBJDIR  =   obj
-
-OBJ = $(addprefix ${OBJDIR}/, ${SRC:.c=.o})
-
+OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 #--- RULES ---#
-${OBJDIR}/%.o : %.c
-	@${CC} ${CFLAGS} -I${INCDIR} -I. -c $< -o $@
+$(OBJDIR)/%.o:	%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -I$(INCDIR) -I. -c $< -o $@
 	
-all				: 	  libft $(NAME)
+all: libft $(NAME)
+
+$(OBJDIR):
+	@$(MK) $(OBJDIR)
 	
-${NAME}		:		$(OBJDIR) $(OBJ)
-	@${CC} ${CFLAGS} -I${INCDIR} -o ${NAME} ${OBJ} $(LDIR)$(LIBFT)
-	@echo "${GREEN}$(NAME) sucessefully compiled 📁.${RESET}"
-
-$(OBJDIR)		:
-	@$(MK) ${OBJDIR}
-
-run				:		all
-	@./${NAME}
-
-libft :
+${NAME}:	$(OBJDIR) $(OBJ)
+	@$(CC) $(CFLAGS) -I$(INCDIR) -o $(NAME) $(OBJ) $(LDIR)$(LIBFT)
+	@echo "$(NAME)$(GREEN) sucessefully compiled 📁.$(RESET)"
+	
+libft:
 	@$(MAKE) -C $(LDIR)
 
-clean			:
+run:	all
+	@./$(NAMES)
+	
+clean:
+	@$(MAKE) -C $(LDIR) clean
 	@$(RM) $(OBJ)
 	@$(RM)r $(OBJDIR)
-	@$(MAKE) -C $(LDIR) clean
+	@$(RM)r $(MLXDIR)
 	
-fclean			: 		clean	
-	@$(RM) $(NAME)
+fclean:	clean	
 	@$(MAKE) -C $(LDIR) fclean
-	@echo "${GREEN}$(NAME) object files and executable successfully removed 🗑.${RESET}"
+	@$(RM) $(NAME)
+	@echo "$(NAME)$(GREEN) object files and executable successfully removed 🗑.$(RESET)"
 
-re				: 		fclean all
+leaks : all
+	@valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map.cub
 
-.PHONY			: 		all clean fclean libft re
+re:	fclean all
+
+.PHONY:	all clean fclean re libft
