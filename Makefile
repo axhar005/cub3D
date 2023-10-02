@@ -6,7 +6,7 @@
 #    By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 12:18:39 by oboucher         ###   ########.fr        #
+#    Updated: 2023/10/02 13:04:56 by oboucher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ INCDIR = inc
 #--- SOURCE ---#
 SRCDIR = src
 
-SRC = 	
+SRC =	parsing/readmap.c utilities/string.c
 
 VPATH	=	${SRCDIR}
 
