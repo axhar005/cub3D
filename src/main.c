@@ -3,28 +3,28 @@
 
 t_global	*g(void)
 {
-    static t_global global;
-    return (&global);
+	static t_global	global;
+
+	return (&global);
 }
 
-void step(void)
+void	step(void *param)
 {
-    //
+	//
+	(void)param;
 }
 
 int	main(int ac, char **av)
 {
-    int width = 100;
-    int height = 100;
+	//	1280 x 720
+	int width = 1280;
+	int height = 720;
 
-	if (ac == 2)
-	{
-        //parsing
-	}
-	else
-		ft_exit("Error> one argument needed (map.ber)");
+	(void)av;
+	(void)ac;
 
-	g()->mlx = mlx_init(width, height, "NAME", false);
+	g()->mlx = mlx_init(VIEW_HEIGHT, VIEW_WIDTH, "LE PLus Beau Cub3D", false);
+
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);
 	mlx_terminate(g()->mlx);

@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 14:51:11 by oboucher         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 # ➜  ~ git clone https://github.com/codam-coding-college/MLX42.git
 # ➜  ~ cd MLX42
@@ -43,7 +32,7 @@ INCDIR = inc
 
 #--- SOURCE ---#
 SRCDIR	=	src
-SRC		= 	main.c
+SRC		= 	main.c graphics
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
