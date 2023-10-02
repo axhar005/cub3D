@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 12:19:28 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/02 13:55:18 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:20:11 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,20 @@
 #include <unistd.h>
 
 // struct
+typedef struct s_position
+{
+    int x;
+    int y;
+}   t_pos;
+
 typedef struct t_parsing
 {
-
+    char *north;
+    char *south;
+    char *east;
+    char *west;
+    t_pos *player_pos;
+    
 } s_parsing;
 
 typedef struct t_global
