@@ -4,7 +4,7 @@
 #define CUB3D_H
 
 // include
-#include "../libft_/inc/libft.h"
+#include "../lib/libft_/inc/libft.h"
 #include <stdbool.h>
 #include <unistd.h>
 
@@ -25,7 +25,6 @@ typedef struct s_parsing
     
 } t_parsing;
 
-
 typedef struct s_global
 {
     t_parsing *parsing;
@@ -40,7 +39,7 @@ typedef struct s_global
 size_t count_next_line(int fd);
 size_t char_count(char *str, char c);
 //----------------------//
-// ------PARSING--------//
+// -------PARSING-------//
 //----------------------//
 
 //----------------------//
