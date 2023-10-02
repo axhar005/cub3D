@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 12:19:28 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/02 14:19:13 by acouture         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 #define CUB3D_H
@@ -19,15 +9,27 @@
 #include <unistd.h>
 
 // struct
-typedef struct t_parsing
+typedef struct s_position
 {
+    int x;
+    int y;
+}   t_pos;
 
-} s_parsing;
+typedef struct s_parsing
+{
+    char *north;
+    char *south;
+    char *east;
+    char *west;
+    t_pos *player_pos;
+    
+} t_parsing;
 
-typedef struct t_global
+
+typedef struct s_global
 {
     s_parsing *parsing;
-} s_global;
+} t_global;
 
 // prototype
 
