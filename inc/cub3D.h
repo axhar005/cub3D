@@ -28,7 +28,7 @@ typedef struct s_parsing
 
 typedef struct s_global
 {
-    s_parsing *parsing;
+    t_parsing *parsing;
 } t_global;
 
 // prototype
