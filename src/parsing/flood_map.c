@@ -1,24 +1,25 @@
 #include "../inc/cub3D.h"
 
-void	flood_fill(int y, int x)
+void flood_fill(int y, int x)
 {
-	t_global	*data;
+    t_global *data;
+    int map_width = find_longest_line(g()->flood_map);
+    int map_height = ft_2darr_len(g()->flood_map);
 
-	data = g();
-	if (x < 0 && y < 0)
-		return ;
-	if (data->flood_map[y][x] == '\n' || data->flood_map[y][x] == ' ')
-		ft_exit_free("Out of bounds\n");
-	else if (data->flood_map[y][x] == 'X' || data->flood_map[y][x] == '1')
-		return ;
-	data->flood_map[y][x] = 'X';
-	flood_fill(y - 1, x);
-	flood_fill(y + 1, x);
-	flood_fill(y, x + 1);
-	flood_fill(y, x - 1);
+    data = g();
+    if (x < 0 || y < 0 || x >= map_width || y >= map_height)
+        ft_exit_free("Out of bounds\n");
+    if (data->flood_map[y][x] == 'X' || data->flood_map[y][x] == '1')
+        return;
+    data->flood_map[y][x] = 'X';
+    flood_fill(y - 1, x);
+    flood_fill(y + 1, x);
+    flood_fill(y, x + 1);
+    flood_fill(y, x - 1);
 }
 
-void	copy_filemap_to_map(int index)
+
+void	copy_filemap_to_floodmap(int index)
 {
 	int	i;
 	int	j;
@@ -35,8 +36,6 @@ void	copy_filemap_to_map(int index)
 		g()->flood_map[j++] = ft_strdup(g()->file[i++]);
 	}
 	g()->flood_map[j] = NULL;
-	/* printf("--- FLOOD MAP ---\n");
-	ft_2darr_print(g()->flood_map, 0); */
 }
 
 void	copy_floodmap_to_map(void)
@@ -94,23 +93,6 @@ void	validate_map(void)
 	}
 }
 
-int	loc_start_map(char c, int x)
-{
-	int	is_map_line;
-
-	is_map_line = 0;
-	while (c != '\n')
-	{
-		if (c != '0' && c != '1')
-		{
-			is_map_line = 1;
-			break ;
-		}
-		x++;
-	}
-	return (is_map_line);
-}
-
 void	transform_map(void)
 {
 	int	y;
@@ -163,12 +145,31 @@ void	make_final_map(void)
 		}
 		y++;
 	}
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < line; j++) {
+	/* for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < line; j++)
+		{
 			printf("%d", g()->final_map[i][j]);
 		}
 		printf("\n");
+	} */
+}
+
+int	loc_start_map(int y, int x)
+{
+	int	is_map_line;
+
+	is_map_line = 0;
+	while (g()->file[y][x] != '\n')
+	{
+		if (g()->file[y][x] != '0' && g()->file[y][x] != '1')
+		{
+			is_map_line = 1;
+			break ;
+		}
+		x++;
 	}
+	return (is_map_line);
 }
 
 void	map(void)
@@ -185,17 +186,26 @@ void	map(void)
 		is_map_line = 0;
 		if (g()->file[y][0] == '\0' || g()->file[y][0] == '\n')
 			y++;
-		is_map_line = loc_start_map(g()->file[y][x], x);
+		is_map_line = loc_start_map(y, x);
 		if (is_map_line == 0)
 			break ;
 		y++;
 	}
-	copy_filemap_to_map(y);
+	copy_filemap_to_floodmap(y);
 	validate_map();
 	flood_fill(g()->parsing.player_pos.y, g()->parsing.player_pos.x);
+	printf("--- FLOOD MAP ---\n");
+	for (int i = 0; g()->flood_map[i]; i++)
+	{
+		for (int j = 0; g()->flood_map[i][j]; j++)
+		{
+			printf("%c", g()->flood_map[i][j]);
+		}
+		/* printf("\n"); */
+	}
 	copy_floodmap_to_map();
 	transform_map();
 	make_final_map();
-	printf("--- AFTER MAP ---\n");
-	ft_2darr_print(g()->map, 0);
+	/* printf("--- AFTER MAP ---\n");
+	ft_2darr_print(g()->map, 0); */
 }
