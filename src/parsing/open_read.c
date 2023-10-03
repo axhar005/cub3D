@@ -65,8 +65,6 @@ void	pars_map(char *file)
 	find_colors();
 	if (g()->parsing.valid_map != 6)
 		ft_exit_free("Elements are not valid\n");
-	validate_map();
-	if (g()->file)
-		ft_2darr_free(g()->file);
+	map();
 	return ;
 }

@@ -35,6 +35,7 @@ SRCDIR	=	src
 SRC		= 	main.c \
 			utilities/free.c \
 			utilities/string.c \
+			utilities/2darray.c \
 			parsing/open_read.c \
 			parsing/find_nswe.c \
 			parsing/find_colors.c \

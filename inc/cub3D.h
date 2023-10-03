@@ -7,6 +7,7 @@
 # include "../lib/libft_/inc/libft.h"
 # include <stdbool.h>
 # include <stdio.h>
+# include <string.h>
 # include <unistd.h>
 
 // struct
@@ -24,14 +25,16 @@ typedef struct s_parsing
 	char			*west;
 	unsigned long	color_f;
 	unsigned long	color_c;
-	t_pos			*player_pos;
-    int             valid_map;
+	char			player_dir;
+	t_pos			player_pos;
+	int				valid_map;
 }					t_parsing;
 
 typedef struct s_global
 {
 	char			**file;
 	char			**map;
+	int				**final_map;
 	char			**flood_map;
 	t_parsing		parsing;
 }					t_global;
@@ -41,7 +44,9 @@ typedef struct s_global
 //----------------------//
 // --------UTILS--------//
 //----------------------//
+int					find_longest_line(char **array);
 void				ft_exit_free(char *s);
+void				free_all(void);
 void				ft_2darr_print(char **tb, int fd);
 void				ft_2darr_free(char **tb);
 size_t				ft_2darr_len(char **arr);
@@ -57,7 +62,7 @@ void				check_extension(char *map);
 void				find_nswe(void);
 void				find_colors(void);
 char				*extract_path(char *string);
-void				validate_map(void);
+void				map(void);
 //----------------------//
 // -------GRAPHICS------//
 //----------------------//

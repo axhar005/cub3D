@@ -17,21 +17,6 @@ void	check_extension(char *map)
 		ft_exit("Wrong type of file");
 }
 
-void	ft_2darr_free(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
-
 void	ft_2darr_print(char **tb, int fd)
 {
 	int	i;
@@ -40,8 +25,10 @@ void	ft_2darr_print(char **tb, int fd)
 	while (tb[i])
 	{
 		ft_putstr_fd(tb[i], fd);
+		printf("\n");
 		i++;
 	}
+	printf("\n");
 }
 
 int	main(int ac, char **av)
@@ -50,5 +37,6 @@ int	main(int ac, char **av)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
 	pars_map(av[1]);
+	free_all();
 	return (0);
 }

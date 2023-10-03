@@ -30,7 +30,7 @@ char	*extract_path(char *string)
 	/* if (check_path(path) == -1)
 	{
 		ft_sfree(path);
-		ft_exit_free("Not a vlaid path");
+		ft_exit_free("Not a valid path");
 	} */
 	return (path);
 }
@@ -49,17 +49,14 @@ void	find_nswe(void)
 		else if (ft_strncmp(g()->file[i], "SO", 2) == 0) {
 			g()->parsing.south = extract_path(g()->file[i]);
 			g()->parsing.valid_map++;
-			printf("SO\n");
 		}
 		else if (ft_strncmp(g()->file[i], "WE", 2) == 0) {
-			printf("WE\n");
 			g()->parsing.valid_map++;
 			g()->parsing.west = extract_path(g()->file[i]);
 		}
 		else if (ft_strncmp(g()->file[i], "EA", 2) == 0) {
 			g()->parsing.east = extract_path(g()->file[i]);
 			g()->parsing.valid_map++;
-			printf("EA\n");
 		}
 		i++;
 	}

@@ -38,6 +38,7 @@ uint32_t	rgba_to_store(char *color_string)
 		i++;
 	}
 	result = createRGBA(colors_split[0], colors_split[1], colors_split[2], 255);
+	free(color_string);
     ft_2darr_free(split);
 	return (result);
 }
@@ -56,14 +57,12 @@ void	find_colors(void)
 			color_f = extract_path(g()->file[i]);
 			g()->parsing.color_f = rgba_to_store(color_f);
 			g()->parsing.valid_map++;
-			printf("%lu\n", g()->parsing.color_f);
 		}
 		else if (ft_strncmp(g()->file[i], "C", 1) == 0)
 		{
 			color_c = extract_path(g()->file[i]);
 			g()->parsing.color_c = rgba_to_store(color_c);
 			g()->parsing.valid_map++;
-			printf("%lu\n", g()->parsing.color_c);
 		}
 		i++;
 	}
