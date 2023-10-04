@@ -67,6 +67,7 @@ size_t				count_next_line(int fd);
 //----------------------//
 // -------GRAPHICS------//
 //----------------------//
+void				load_init_texture(void);
 void				raycast(t_player player, mlx_image_t *image);
 void				setPlayerDir(t_player *player, char c);
 void				set_background(mlx_image_t *image, uint32_t color,

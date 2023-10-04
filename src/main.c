@@ -11,10 +11,11 @@ t_global	*g(void)
 void	step(void *param)
 {
 	(void)param;
-    printf("dir_x : %f, dir_Y %f\n", g()->player.dirX, g()->player.dirY);
 	set_background(g()->image, 0x699FF5FF, 0x662D01FF);
 
     raycast(g()->player, g()->image);
+
+    setPlayerDir(&g()->player, 'W');
 
 	if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT))
 	{
@@ -25,8 +26,8 @@ void	step(void *param)
 		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -1 * M_PI / 180.0);
 	}
 
-	double moveSpeed = 0.03;
 
+	double moveSpeed = 0.03;
     double newX, newY;
 
 	//forward
@@ -118,12 +119,13 @@ int	main(int ac, char **av)
         }
     }
 
-	g()->player.posX = 2;
-	g()->player.posY = 2;
+	g()->player.posX = 2.5;
+	g()->player.posY = 2.5;
 	g()->player.planeX = 0;
 	g()->player.planeY = 0.66;
     g()->player.dirX = -1;
 	g()->player.dirY = 0;
+
 
 	(void)av;
 	(void)ac;
@@ -131,7 +133,7 @@ int	main(int ac, char **av)
 	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "LE PLus Beau Cub3D", false);
 	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
     mlx_image_to_window(g()->mlx, g()->image, 0, 0);
-
+    // load_init_texture();
 
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);

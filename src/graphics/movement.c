@@ -15,25 +15,31 @@ void rotate_view(double *dirX, double *dirY, double *planeX, double *planeY, dou
 
 void setPlayerDir(t_player *player, char c)
 {
-    if (c == 'S') {
-        player->dirX = 0;
-        player->dirY = 1;
-        player->planeX = -0.66;
-        player->planeY = 0;
-    } else if (c == 'E') {
-        player->dirX = 1;
-        player->dirY = 0;
-        player->planeX = 0;
-        player->planeY = 0.66;
-    } else if (c == 'W') {
-        player->dirX = -1;
-        player->dirY = 0;
-        player->planeX = 0;
-        player->planeY = -0.66;
-    } else {
-        player->dirX = 0;
-        player->dirY = -1;
-        player->planeX = 0.66;
-        player->planeY = 0;
+    static bool first = true;
+
+    if (first == true)
+    {
+        if (c == 'S') {
+            player->dirX = 0;
+            player->dirY = 1;
+            player->planeX = 0.66;
+            player->planeY = 0;
+        } else if (c == 'E') {
+            player->dirX = -1;
+            player->dirY = 0;
+            player->planeX = 0;
+            player->planeY = 0.66;
+        } else if (c == 'W') {
+            player->dirX = 1;
+            player->dirY = 0;
+            player->planeX = 0;
+            player->planeY = -0.66;
+        } else {
+            player->dirX = 0;
+            player->dirY = -1;
+            player->planeX = -0.66;
+            player->planeY = 0;
+        }
+        first = false;
     }
 }

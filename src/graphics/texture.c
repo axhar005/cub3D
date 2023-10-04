@@ -1,6 +1,6 @@
 #include "../../inc/cub3D.h"
 
-void load_intit_texture(void)
+void load_init_texture(void)
 {
     g()->texture[0] = mlx_load_png(g()->parsing->north);
     g()->texture[0] = mlx_load_png(g()->parsing->south);
