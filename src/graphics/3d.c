@@ -85,10 +85,14 @@ void raycast(t_player player, mlx_image_t *image) {
             int texY = ((d * g()->texture[texNum]->height) / lineHeight) / 256;
 
             // Obtenez la couleur de la texture
-            int color = *((int*)g()->texture[texNum]->pixels + (texY * g()->texture[texNum]->width + texX));
+            uint32_t color = *((uint32_t*)g()->texture[texNum]->pixels + (texY * g()->texture[texNum]->width + texX));;
+            uint32_t rearranged_color = ((color & 0xFF000000) >> 24) |  // R
+                            ((color & 0x00FF0000) >> 8)  |  // G
+                            ((color & 0x0000FF00) << 8)  |  // B
+                            ((color & 0x000000FF) << 24);  // A
 
             // Dessinez le pixel
-            mlx_put_pixel(image, x, y, color);
+            mlx_put_pixel(image, x, y, rearranged_color);
 
             y++;
         }
