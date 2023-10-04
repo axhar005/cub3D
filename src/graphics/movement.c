@@ -15,13 +15,19 @@ void rotate_view(double *dirX, double *dirY, double *planeX, double *planeY, dou
 
 void player_rotation(void)
 {
+    int rot_speed;
+
+    if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT_SHIFT))
+        rot_speed = MAX_ROT_SPEED;
+    else
+        rot_speed = MIN_ROT_SPEED;
     if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT))
     {
-        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, 1 * M_PI / 180.0);
+        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, rot_speed * M_PI / 180.0);
     }
     if (mlx_is_key_down(g()->mlx, MLX_KEY_RIGHT))
     {
-        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -1 * M_PI / 180.0);
+        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -rot_speed * M_PI / 180.0);
     }
 }
 

@@ -14,7 +14,9 @@
 # define VIEW_HEIGHT 1080
 # define VIEW_WIDTH 1920
 # define MIN_SPEED 0.03
-# define MAX_SPEED 0.06
+# define MAX_SPEED 0.08
+# define MIN_ROT_SPEED 1
+# define MAX_ROT_SPEED 2
 
 // struct
 
