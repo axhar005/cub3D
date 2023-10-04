@@ -39,7 +39,8 @@ SRC		= 	main.c \
 			parsing/open_read.c \
 			parsing/find_nswe.c \
 			parsing/find_colors.c \
-			parsing/flood_map.c 
+			parsing/flood_map.c \
+			parsing/map.c  
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
@@ -64,7 +65,7 @@ libft:
 	@$(MAKE) -C $(LDIR)
 
 run:	all
-	@./$(NAMES)
+	@./$(NAME) map.cub
 	
 clean:
 	@$(MAKE) -C $(LDIR) clean
