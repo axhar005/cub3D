@@ -10,130 +10,59 @@ t_global	*g(void)
 
 void	step(void *param)
 {
+	static double	frame;
+
 	(void)param;
-	set_background(g()->image, 0x699FF5FF, 0x662D01FF);
-
-    raycast(g()->player, g()->image);
-
-    setPlayerDir(&g()->player, 'W');
-
-	if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT))
+	g()->delta_time = g()->mlx->delta_time * 30;
+	if (frame >= 1)
 	{
-		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, 1 * M_PI / 180.0);
+		set_background(g()->image, 0x615445FF, 0x3b3a3aFF);
+		raycast(g()->player, g()->image);
+		setPlayerDir(&g()->player, 'W');
+		player_rotation();
+		player_movement();
 	}
-	if (mlx_is_key_down(g()->mlx, MLX_KEY_RIGHT))
-	{
-		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -1 * M_PI / 180.0);
-	}
-
-
-	double moveSpeed = 0.03;
-    double newX, newY;
-
-	//forward
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_W))
-    {
-        // Vérifier la collision pour l'axe X
-        newX = g()->player.posX + g()->player.dirX * moveSpeed;
-        if (g()->map[(int)newX][(int)g()->player.posY] == 0) // 0 indique un espace vide
-        {
-            g()->player.posX = newX;
-        }
-
-        // Vérifier la collision pour l'axe Y
-        newY = g()->player.posY + g()->player.dirY * moveSpeed;
-        if (g()->map[(int)g()->player.posX][(int)newY] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // back
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_S))
-    {
-        newX = g()->player.posX - g()->player.dirX * moveSpeed;
-        if (g()->map[(int)newX][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-
-        newY = g()->player.posY - g()->player.dirY * moveSpeed;
-        if (g()->map[(int)g()->player.posX][(int)newY] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // right
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_A))
-    {
-        newX = g()->player.posX - g()->player.dirY * moveSpeed;
-        if (g()->map[(int)newX][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-
-        newY = g()->player.posY + g()->player.dirX * moveSpeed;
-        if (g()->map[(int)g()->player.posX][(int)newY] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // left
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_D))
-    {
-        newX = g()->player.posX + g()->player.dirY * moveSpeed;
-        if (g()->map[(int)newX][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-
-        newY = g()->player.posY - g()->player.dirX * moveSpeed;
-        if (g()->map[(int)g()->player.posX][(int)newY] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
+	frame += g()->delta_time;
 }
 
 int	main(int ac, char **av)
 {
-	int tempMap[10][10] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-	};
-
-	int i, j;
-    for(i = 0; i < 10; ++i) {
-        for(j = 0; j < 10; ++j) {
-            g()->map[i][j] = tempMap[i][j];
-        }
-    }
-
-	g()->player.posX = 2.5;
-	g()->player.posY = 2.5;
-	g()->player.planeX = 0;
-	g()->player.planeY = 0.66;
-    g()->player.dirX = -1;
-	g()->player.dirY = 0;
-
-
 	(void)av;
 	(void)ac;
+	int tempMap[10][10] = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
 
-	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "LE PLus Beau Cub3D", false);
+	int i, j;
+	for (i = 0; i < 10; ++i)
+	{
+		for (j = 0; j < 10; ++j)
+		{
+			g()->map[i][j] = tempMap[i][j];
+		}
+	}
+
+	g()->player.posX = 1.5;
+	g()->player.posY = 1.5;
+	g()->player.planeX = 0;
+	g()->player.planeY = 0.66;
+	g()->player.dirX = -1;
+	g()->player.dirY = 0;
+	g()->player.move_speed = 0.03;
+
+
+	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
 	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
-    mlx_image_to_window(g()->mlx, g()->image, 0, 0);
-    load_init_texture();
+	mlx_image_to_window(g()->mlx, g()->image, 0, 0);
+	load_init_texture();
 
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);

@@ -11,8 +11,10 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# define VIEW_HEIGHT 720
-# define VIEW_WIDTH 1280
+# define VIEW_HEIGHT 1080
+# define VIEW_WIDTH 1920
+# define MIN_SPEED 0.03
+# define MAX_SPEED 0.06
 
 // struct
 
@@ -24,6 +26,7 @@ typedef struct s_player
 	double			dirY;
 	double			planeX;
 	double			planeY;
+	double			move_speed;
 }					t_player;
 
 typedef struct s_position
@@ -49,6 +52,7 @@ typedef struct s_global
 	mlx_image_t		*image;
 	int				map[10][10];
 	t_player		player;
+	double			delta_time;
 	t_parsing		*parsing;
 }					t_global;
 
@@ -67,11 +71,13 @@ size_t				count_next_line(int fd);
 //----------------------//
 // -------GRAPHICS------//
 //----------------------//
+void				player_movement(void);
+void				player_rotation(void);
 void				load_init_texture(void);
 void				raycast(t_player player, mlx_image_t *image);
 void				setPlayerDir(t_player *player, char c);
-void				set_background(mlx_image_t *image, uint32_t color,
-						uint32_t roof_color);
+void				set_background(mlx_image_t *image, uint32_t roof_color,
+						uint32_t floor_color);
 void				rotate_view(double *dirX, double *dirY, double *planeX,
 						double *planeY, double theta);
 
