@@ -11,20 +11,21 @@ t_global	*g(void)
 void	step(void *param)
 {
 	(void)param;
-	set_background(g()->image, 0x699FF5FF, 0x696969FF);
+    printf("dir_x : %f, dir_Y %f\n", g()->player.dirX, g()->player.dirY);
+	set_background(g()->image, 0x699FF5FF, 0x662D01FF);
 
     raycast(g()->player, g()->image);
 
 	if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT))
 	{
-		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -1 * M_PI / 180.0);
+		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, 1 * M_PI / 180.0);
 	}
 	if (mlx_is_key_down(g()->mlx, MLX_KEY_RIGHT))
 	{
-		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, 1 * M_PI / 180.0);
+		rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -1 * M_PI / 180.0);
 	}
 
-	double moveSpeed = 0.05;
+	double moveSpeed = 0.03;
 
     double newX, newY;
 
@@ -63,7 +64,7 @@ void	step(void *param)
     }
 
     // right
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_D))
+    if (mlx_is_key_down(g()->mlx, MLX_KEY_A))
     {
         newX = g()->player.posX - g()->player.dirY * moveSpeed;
         if (g()->map[(int)newX][(int)g()->player.posY] == 0)
@@ -79,7 +80,7 @@ void	step(void *param)
     }
 
     // left
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_A))
+    if (mlx_is_key_down(g()->mlx, MLX_KEY_D))
     {
         newX = g()->player.posX + g()->player.dirY * moveSpeed;
         if (g()->map[(int)newX][(int)g()->player.posY] == 0)
@@ -99,11 +100,11 @@ int	main(int ac, char **av)
 {
 	int tempMap[10][10] = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
+    {1, 0, 0, 0, 0, 0, 1, 1, 0, 1},
+    {1, 0, 0, 0, 0, 0, 0, 1, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 1, 1},
-    {1, 0, 0, 0, 1, 1, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -119,10 +120,10 @@ int	main(int ac, char **av)
 
 	g()->player.posX = 2;
 	g()->player.posY = 2;
-	g()->player.dirX = 1;
-	g()->player.dirY = 0;
 	g()->player.planeX = 0;
 	g()->player.planeY = 0.66;
+    g()->player.dirX = -1;
+	g()->player.dirY = 0;
 
 	(void)av;
 	(void)ac;

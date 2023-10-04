@@ -1,24 +1,5 @@
 #include "../../inc/cub3D.h"
 
-void rotate_view(double *dirX, double *dirY, double *planeX, double *planeY, double theta) {
-    // Rotation du vecteur direction
-    double oldDirX = *dirX;
-    *dirX = *dirX * cos(theta) - *dirY * sin(theta);
-    *dirY = oldDirX * sin(theta) + *dirY * cos(theta);
-
-    // Rotation du vecteur plan
-    double oldPlaneX = *planeX;
-    *planeX = *planeX * cos(theta) - *planeY * sin(theta);
-    *planeY = oldPlaneX * sin(theta) + *planeY * cos(theta);
-}
-
-void draw_vertical_line(mlx_image_t* image, int x, int start, int end, uint32_t color) 
-{
-    for (int y = start; y < end; y++) {
-        mlx_put_pixel(image, x, y, color);
-    }
-}
-
 void raycast(t_player player, mlx_image_t *image) {
     int x = 0;
     while (x < VIEW_WIDTH) {
@@ -80,10 +61,18 @@ void raycast(t_player player, mlx_image_t *image) {
         int drawEnd = lineHeight / 2 + VIEW_HEIGHT / 2;
         if (drawEnd >= VIEW_HEIGHT) drawEnd = VIEW_HEIGHT - 1;
 
-        // Dessiner la colonne
         int y = drawStart;
+        uint32_t color;
+
+        // Choisissez la couleur en fonction de l'orientation du mur
+        if (side == 0) { // Mur est-ouest
+            color = rayDirX < 0 ? 0x44FF33FF : 0xF8FF33FF;  // Bleu si Ouest, Jaune si Est
+        } else {  // Mur nord-sud
+            color = rayDirY < 0 ? 0xFF3333FF : 0x334EFFFF;  // Rouge si Nord, Vert si Sud
+        }
+
         while (y < drawEnd) {
-            mlx_put_pixel(image, x, y, 0xf0c26eFF);  // Utilisation de la couleur avec alpha
+            mlx_put_pixel(image, x, y, color);  // Utilisation de la couleur avec alpha
             y++;
         }
         x++;
