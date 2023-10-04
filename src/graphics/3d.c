@@ -61,18 +61,35 @@ void raycast(t_player player, mlx_image_t *image) {
         int drawEnd = lineHeight / 2 + VIEW_HEIGHT / 2;
         if (drawEnd >= VIEW_HEIGHT) drawEnd = VIEW_HEIGHT - 1;
 
-        int y = drawStart;
-        uint32_t color;
-
-        // Choisissez la couleur en fonction de l'orientation du mur
-        if (side == 0) { // Mur est-ouest
-            color = rayDirX < 0 ? 0x44FF33FF : 0xF8FF33FF;  // Bleu si Ouest, Jaune si Est
-        } else {  // Mur nord-sud
-            color = rayDirY < 0 ? 0xFF3333FF : 0x334EFFFF;  // Rouge si Nord, Vert si Sud
+        // Choix de la texture en fonction de l'orientation du mur
+        int texNum;
+        if (side == 0) {
+            texNum = stepX > 0 ? 0 : 1; // Nord ou Sud
+        } else {
+            texNum = stepY > 0 ? 2 : 3; // Est ou Ouest
         }
 
+        // Calcul de la valeur de texX
+        double wallX;
+        if (side == 0) wallX = player.posY + perpWallDist * rayDirY;
+        else wallX = player.posX + perpWallDist * rayDirX;
+        wallX -= floor(wallX);
+
+        int texX = (int)(wallX * (double)g()->texture[texNum]->width);
+
+        // Dessiner la colonne
+        int y = drawStart;
         while (y < drawEnd) {
-            mlx_put_pixel(image, x, y, color);  // Utilisation de la couleur avec alpha
+            // Calcul de texY
+            int d = y * 256 - VIEW_HEIGHT * 128 + lineHeight * 128;
+            int texY = ((d * g()->texture[texNum]->height) / lineHeight) / 256;
+
+            // Obtenez la couleur de la texture
+            int color = *((int*)g()->texture[texNum]->pixels + (texY * g()->texture[texNum]->width + texX));
+
+            // Dessinez le pixel
+            mlx_put_pixel(image, x, y, color);
+
             y++;
         }
         x++;

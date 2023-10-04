@@ -133,7 +133,7 @@ int	main(int ac, char **av)
 	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "LE PLus Beau Cub3D", false);
 	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
     mlx_image_to_window(g()->mlx, g()->image, 0, 0);
-    // load_init_texture();
+    load_init_texture();
 
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);
