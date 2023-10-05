@@ -40,7 +40,8 @@ SRC		= 	main.c \
 			parsing/find_nswe.c \
 			parsing/find_colors.c \
 			parsing/flood_map.c \
-			parsing/map.c  
+			parsing/map.c \
+			parsing/final_map.c 
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#

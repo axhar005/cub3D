@@ -1,4 +1,4 @@
-#include "../inc/cub3D.h"
+#include "../../inc/cub3D.h"
 
 size_t	count_next_line(int fd)
 {
@@ -24,16 +24,18 @@ size_t	count_next_line(int fd)
 
 int	open_file(char *file)
 {
-	int	fd;
-	int	count;
+	int			fd;
+	int			count;
+	t_global	*gl;
 
+	gl = g();
 	count = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_exit("Error loading map");
 	count = count_next_line(fd);
-	g()->file = ft_calloc((count + 1), sizeof(char *));
-	if (!g()->file)
+	gl->file = ft_calloc((count + 1), sizeof(char *));
+	if (!gl->file)
 		ft_exit("Malloc failed");
 	close(fd);
 	return (count);
@@ -57,7 +59,7 @@ void	store_file(char *file)
 		count--;
 	}
 	if (i == 1)
-			ft_exit_free("Empty map\n");
+		ft_exit_free("Empty map\n");
 	close(fd);
 }
 

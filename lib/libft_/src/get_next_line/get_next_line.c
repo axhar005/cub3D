@@ -6,12 +6,11 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 12:09:03 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/05 15:30:34 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:36:22 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static size_t	ft_find(char *str)
 {
@@ -45,16 +44,24 @@ static char	*ft_small_split(char *line, size_t *pos)
 	return (fnext_line);
 }
 
+static int	init_check(int fd, t_var *var)
+{
+	var->rd = 0;
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX || read(fd, &var->buffer,
+			0) < 0)
+		return (0);
+	return (1);
+}
+
 /// @brief get the next line in a file
-/// @param fd is a file descriptor 
+/// @param fd is a file descriptor
 /// @return the next line
 char	*get_next_line(int fd)
 {
-	static char	*line[OPEN_MAX];
-	t_var		var;
+	static char *line[OPEN_MAX];
+	t_var var;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX
-		|| read(fd, &var.buffer, 0) < 0)
+	if (init_check(fd, &var) == 0)
 		return (line[fd] = ft_sfree(line[fd]), NULL);
 	if (!line[fd])
 		line[fd] = ft_gnl_calloc(1, sizeof(char));

@@ -1,4 +1,4 @@
-#include "../inc/cub3D.h"
+#include "../../inc/cub3D.h"
 
 int	check_path(char *path)
 {
@@ -30,36 +30,32 @@ char	*extract_path(char *string)
 	/* if (check_path(path) == -1)
 	{
 		ft_sfree(path);
-		ft_exit_free("Not a valid path");
+		ft_exit_free("Not a valid path\n");
 	} */
+	g()->parsing.valid_map++;
 	return (path);
 }
 
-
 void	find_nswe(void)
 {
-	int i;
+	int		i;
+	char	*trimmed_str;
 
 	i = 0;
 	while (g()->file[i])
 	{
-		char *trimmed_str = ft_strtrim(g()->file[i], " ");
-		if (ft_strncmp(trimmed_str, "NO", 2) == 0 && (trimmed_str[2] == ' ')) {
+		trimmed_str = ft_strtrim(g()->file[i], " ");
+		if (ft_strncmp(trimmed_str, "NO", 2) == 0 && (trimmed_str[2] == ' '))
 			g()->parsing.north = extract_path(trimmed_str);
-			g()->parsing.valid_map++;
-		}
-		else if (ft_strncmp(trimmed_str, "SO", 2) == 0 && (trimmed_str[2] == ' ')) {
+		else if (ft_strncmp(trimmed_str, "SO", 2) == 0
+			&& (trimmed_str[2] == ' '))
 			g()->parsing.south = extract_path(trimmed_str);
-			g()->parsing.valid_map++;
-		}
-		else if (ft_strncmp(trimmed_str, "WE", 2) == 0 && (trimmed_str[2] == ' ')) {
+		else if (ft_strncmp(trimmed_str, "WE", 2) == 0
+			&& (trimmed_str[2] == ' '))
 			g()->parsing.west = extract_path(trimmed_str);
-			g()->parsing.valid_map++;
-		}
-		else if (ft_strncmp(trimmed_str, "EA", 2) == 0 && (trimmed_str[2] == ' ')) {
+		else if (ft_strncmp(trimmed_str, "EA", 2) == 0
+			&& (trimmed_str[2] == ' '))
 			g()->parsing.east = extract_path(trimmed_str);
-			g()->parsing.valid_map++;
-		}
 		free(trimmed_str);
 		i++;
 	}

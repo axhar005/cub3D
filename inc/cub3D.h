@@ -63,7 +63,7 @@ size_t				char_count(char *str, char c);
 // find colors
 void				find_colors(void);
 uint32_t			rgba_to_store(char *color_string);
-uint32_t			createRGBA(int r, int g, int b, int a);
+uint32_t			create_rgba(int r, int g, int b, int a);
 int					check_number(char *s);
 // find nswe
 void				find_nswe(void);
@@ -72,10 +72,15 @@ char				*extract_path(char *string);
 // map
 void				validate_map(void);
 void				transform_map(void);
-int					calc_map_size(int size);
-void				make_final_map(void);
 int					loc_start_map(char *trimmed, int y, int x);
 void				map(void);
+void				exec_map(int y);
+// final_map
+int					calc_map_size(int size);
+void				make_final_map(void);
+void				calloc_final_map_line(int new_y);
+void				alloc_final_map(void);
+
 // flood map
 void				flood_fill(int y, int x, int map_width, int map_height);
 void				copy_filemap_to_floodmap(int index);
