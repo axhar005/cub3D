@@ -11,7 +11,7 @@ LIBFT = libft.a
 
 #--- COMMAND VARIABLES ---#
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 RM = rm -f
 AR = ar rcs
 MK = mkdir -p
@@ -32,7 +32,7 @@ INCDIR = inc
 
 #--- SOURCE ---#
 SRCDIR	=	src
-SRC		= 	main.c graphics/3d.c graphics/texture.c graphics/pixel.c graphics/movement.c utilities/string.c 
+SRC		= 	main.c graphics/3d.c graphics/texture.c graphics/pixel.c graphics/movement.c graphics/view.c utilities/string.c 
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
@@ -68,7 +68,10 @@ clean:
 	@$(RM) $(OBJ)
 	@$(RM)r $(OBJDIR)
 	@$(RM)r $(MLXDIR)
-	
+
+leaks : all
+    @valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map.cub
+
 fclean:	clean	
 	@$(MAKE) -C $(LDIR) fclean
 	@$(RM) $(NAME)

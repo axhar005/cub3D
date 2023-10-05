@@ -17,6 +17,7 @@
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
 # define MAX_ROT_SPEED 3
+# define HITBOX 0.4
 
 // struct
 
@@ -77,10 +78,9 @@ void				player_movement(void);
 void				player_rotation(void);
 void				load_init_texture(void);
 void				raycast(t_player player, mlx_image_t *image);
-void				setPlayerDir(t_player *player, char c);
+void				change_player_dir(t_player *player, char c);
 void				set_background(mlx_image_t *image, uint32_t roof_color,
 						uint32_t floor_color);
-void				rotate_view(double *dirX, double *dirY, double *planeX,
-						double *planeY, double theta);
+void				rotate_view(double theta);
 
 #endif

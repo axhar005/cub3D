@@ -1,135 +1,72 @@
 #include "../../inc/cub3D.h"
 
-void rotate_view(double *dirX, double *dirY, double *planeX, double *planeY, double theta)
+static void	w_s_movement(double *new_x, double *new_y, t_player *player,
+		t_global *gl)
 {
-    // Rotation du vecteur direction
-    double oldDirX = *dirX;
-    *dirX = *dirX * cos(theta) - *dirY * sin(theta);
-    *dirY = oldDirX * sin(theta) + *dirY * cos(theta);
-
-    // Rotation du vecteur plan
-    double oldPlaneX = *planeX;
-    *planeX = *planeX * cos(theta) - *planeY * sin(theta);
-    *planeY = oldPlaneX * sin(theta) + *planeY * cos(theta);
+	if (mlx_is_key_down(gl->mlx, MLX_KEY_W))
+	{
+		*new_x = gl->player.posX + gl->player.dirX * player->move_speed;
+		if (gl->map[(int)(*new_x + gl->player.dirX
+				* HITBOX)][(int)gl->player.posY] == 0)
+			gl->player.posX = *new_x;
+		*new_y = gl->player.posY + gl->player.dirY * player->move_speed;
+		if (gl->map[(int)gl->player.posX][(int)(*new_y + gl->player.dirY
+			* HITBOX)] == 0)
+			gl->player.posY = *new_y;
+	}
+	if (mlx_is_key_down(gl->mlx, MLX_KEY_S))
+	{
+		*new_x = gl->player.posX - gl->player.dirX * player->move_speed;
+		if (gl->map[(int)(*new_x + gl->player.dirX * -HITBOX)]
+			[(int)gl->player.posY] == 0)
+			gl->player.posX = *new_x;
+		*new_y = gl->player.posY - gl->player.dirY * player->move_speed;
+		if (gl->map[(int)gl->player.posX]
+			[(int)(*new_y + gl->player.dirY * -HITBOX)] == 0)
+			gl->player.posY = *new_y;
+	}
 }
 
-void player_rotation(void)
+static void	a_d_movement(double *new_x, double *new_y, t_player *player,
+		t_global *gl)
 {
-    int rot_speed;
-
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT_SHIFT))
-        rot_speed = MAX_ROT_SPEED;
-    else
-        rot_speed = MIN_ROT_SPEED;
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT))
-    {
-        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, rot_speed * M_PI / 180.0);
-    }
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_RIGHT))
-    {
-        rotate_view(&g()->player.dirX, &g()->player.dirY, &g()->player.planeX, &g()->player.planeY, -rot_speed * M_PI / 180.0);
-    }
+	if (mlx_is_key_down(gl->mlx, MLX_KEY_A))
+	{
+		*new_x = gl->player.posX - gl->player.dirY * player->move_speed;
+		*new_y = gl->player.posY + gl->player.dirX * player->move_speed;
+		if (gl->map[(int)(*new_x - gl->player.dirY * HITBOX)]
+			[(int)gl->player.posY] == 0)
+			gl->player.posX = *new_x;
+		if (gl->map[(int)gl->player.posX]
+			[(int)(*new_y + gl->player.dirX * HITBOX)] == 0)
+			gl->player.posY = *new_y;
+	}
+	if (mlx_is_key_down(gl->mlx, MLX_KEY_D))
+	{
+		*new_x = gl->player.posX + gl->player.dirY * player->move_speed;
+		*new_y = gl->player.posY - gl->player.dirX * player->move_speed;
+		if (gl->map[(int)(*new_x + gl->player.dirY * HITBOX)]
+			[(int)gl->player.posY] == 0)
+			gl->player.posX = *new_x;
+		if (gl->map[(int)gl->player.posX]
+			[(int)(*new_y - gl->player.dirX * HITBOX)] == 0)
+			gl->player.posY = *new_y;
+	}
 }
 
-void setPlayerDir(t_player *player, char c)
+void	player_movement(void)
 {
-    static bool first = true;
+	t_global	*gl;
+	t_player	*player;
+	double		new_x;
+	double		new_y;
 
-    if (first == true)
-    {
-        if (c == 'S') {
-            player->dirX = 0;
-            player->dirY = 1;
-            player->planeX = 0.66;
-            player->planeY = 0;
-        } else if (c == 'E') {
-            player->dirX = -1;
-            player->dirY = 0;
-            player->planeX = 0;
-            player->planeY = 0.66;
-        } else if (c == 'W') {
-            player->dirX = 1;
-            player->dirY = 0;
-            player->planeX = 0;
-            player->planeY = -0.66;
-        } else {
-            player->dirX = 0;
-            player->dirY = -1;
-            player->planeX = -0.66;
-            player->planeY = 0;
-        }
-        first = false;
-    }
-}
-
-void player_movement(void)
-{
-    double newX, newY;
-    double offset = 0.25;
-    //forward
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_LEFT_SHIFT))
-        g()->player.move_speed = MAX_SPEED;
-    else
-        g()->player.move_speed = MIN_SPEED;
-
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_W))
-    {
-        // Vérifier la collision pour l'axe X
-        newX = g()->player.posX + g()->player.dirX * g()->player.move_speed;
-        if (g()->map[(int)(newX + g()->player.dirX * offset)][(int)g()->player.posY] == 0) // 0 indique un espace vide
-        {
-            g()->player.posX = newX;
-        }
-
-        // Vérifier la collision pour l'axe Y
-        newY = g()->player.posY + g()->player.dirY * g()->player.move_speed;
-        if (g()->map[(int)g()->player.posX][(int)(newY + g()->player.dirY * offset)] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // back
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_S))
-    {
-        newX = g()->player.posX - g()->player.dirX * g()->player.move_speed;
-        if (g()->map[(int)(newX + g()->player.dirX * -offset)][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-
-        newY = g()->player.posY - g()->player.dirY * g()->player.move_speed;
-        if (g()->map[(int)g()->player.posX][(int)(newY + g()->player.dirY * -offset)] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // right
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_A)) {
-        newX = g()->player.posX - g()->player.dirY * g()->player.move_speed;
-        newY = g()->player.posY + g()->player.dirX * g()->player.move_speed;
-        if (g()->map[(int)(newX - g()->player.dirY * offset)][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-        if (g()->map[(int)g()->player.posX][(int)(newY + g()->player.dirX * offset)] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
-
-    // left
-    if (mlx_is_key_down(g()->mlx, MLX_KEY_D)) {
-        newX = g()->player.posX + g()->player.dirY * g()->player.move_speed;
-        newY = g()->player.posY - g()->player.dirX * g()->player.move_speed;
-        if (g()->map[(int)(newX + g()->player.dirY * offset)][(int)g()->player.posY] == 0)
-        {
-            g()->player.posX = newX;
-        }
-        if (g()->map[(int)g()->player.posX][(int)(newY - g()->player.dirX * offset)] == 0)
-        {
-            g()->player.posY = newY;
-        }
-    }
+	gl = g();
+	player = &g()->player;
+	if (mlx_is_key_down(gl->mlx, MLX_KEY_LEFT_SHIFT))
+		player->move_speed = MAX_SPEED;
+	else
+		player->move_speed = MIN_SPEED;
+	w_s_movement(&new_x, &new_y, player, g());
+	a_d_movement(&new_x, &new_y, player, g());
 }
