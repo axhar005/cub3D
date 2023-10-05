@@ -1,10 +1,10 @@
 #include "../inc/cub3D.h"
 
-void validate_map(void)
+void	validate_map(void)
 {
-	int x;
-	int y;
-	int c;
+	int	x;
+	int	y;
+	int	c;
 
 	y = -1;
 	/* ft_2darr_print(g()->flood_map, 1); */
@@ -20,7 +20,8 @@ void validate_map(void)
 				g()->parsing.player_pos.x = x;
 				g()->parsing.player_pos.y = y;
 			}
-			else if (c != '1' && c != '0' && c != '\n' && c != '\0' && !ft_isspace(c))
+			else if (c != '1' && c != '0' && c != '\n' && c != '\0'
+				&& !ft_isspace(c))
 			{
 				printf("ERROR = %c\n", g()->flood_map[y][x]);
 				ft_exit_free("Parsing map error = \n");
@@ -29,10 +30,10 @@ void validate_map(void)
 	}
 }
 
-void transform_map(void)
+void	transform_map(void)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	x = 0;
@@ -43,7 +44,8 @@ void transform_map(void)
 		{
 			if (g()->map[y][x] == '\n')
 				g()->map[y][x] = '\0';
-			if (g()->map[y][x] != '0' && g()->map[y][x] != '1' && g()->map[y][x] != '\0')
+			if (g()->map[y][x] != '0' && g()->map[y][x] != '1'
+				&& g()->map[y][x] != '\0')
 				g()->map[y][x] = '0';
 			x++;
 		}
@@ -51,24 +53,27 @@ void transform_map(void)
 	}
 }
 
-int calc_map_size(int size)
+int	calc_map_size(int size)
 {
+	int	y;
+	int	res;
+
 	(void)size;
-	int y = 0;
-	int res = 0;
+	y = 0;
+	res = 0;
 	while (g()->map[y])
 	{
 		if (strchr(g()->map[y], '1'))
 			res++;
 		y++;
 	}
-	return res;
+	return (res);
 }
 
-void alloc_final_map()
+void	alloc_final_map(void)
 {
-	int size;
-	int new_size;
+	int	size;
+	int	new_size;
 
 	size = ft_2darr_len(g()->map);
 	new_size = calc_map_size(size);
@@ -77,19 +82,19 @@ void alloc_final_map()
 		ft_exit_free("Calloc failed");
 }
 
-void make_final_map(void)
+void	make_final_map(void)
 {
-	int line;
-	int x;
-	int y = 0;
-	int newY = 0;
+	int	line;
+	int	x;
+	int	y;
+	int	newY;
+	int	size;
+	int	new_size;
 
-	int size;
-	int new_size;
-
+	y = 0;
+	newY = 0;
 	size = ft_2darr_len(g()->map);
 	new_size = calc_map_size(size);
-
 	y = 0;
 	newY = 0;
 	line = find_longest_line(g()->map);
@@ -108,41 +113,32 @@ void make_final_map(void)
 		}
 		y++;
 	}
-	printf("--- FINAL MAP ---\n");
-	for (int i = 0; i < new_size; i++)
-	{
-		for (int j = 0; j < line; j++)
-		{
-			printf("%d", g()->final_map[i][j]);
-		}
-		printf("\n");
-	}
 }
 
-int loc_start_map(int y, int x)
+int	loc_start_map(char *trimmed, int y, int x)
 {
-	int is_map_line;
+	(void)y;
+	int	is_map_line;
 
 	is_map_line = 0;
-	if (g()->file[y][x] == '\0' || g()->file[y][x] == ' ')
-		return 1;
-	while (g()->file[y][x] != '\0' && g()->file[y][x] != '\n')
+	while (trimmed[x] != '\0' && trimmed[x] != '\n')
 	{
-		if (g()->file[y][x] != '0' && g()->file[y][x] != '1')
+		if (trimmed[x] != '0' && trimmed[x] != '1')
 		{
 			is_map_line = 1;
-			break;
+			break ;
 		}
 		x++;
 	}
 	return (is_map_line);
 }
 
-void map(void)
+void	map(void)
 {
-	int y;
-	int x;
-	int is_map_line;
+	int		y;
+	int		x;
+	int		is_map_line;
+	char	*trimmed;
 
 	y = 0;
 	x = 0;
@@ -150,11 +146,17 @@ void map(void)
 	{
 		x = 0;
 		is_map_line = 0;
-		if (g()->file[y][0] == '\0' || g()->file[y][0] == '\n')
+		trimmed = ft_strtrim(g()->file[y], " ");
+		if (*trimmed == '\0' || *trimmed == '\n')
+		{
 			y++;
-		is_map_line = loc_start_map(y, x);
+			free(trimmed);
+			continue ;
+		}
+		is_map_line = loc_start_map(trimmed, y, x);
+		free(trimmed);
 		if (is_map_line == 0)
-			break;
+			break ;
 		y++;
 	}
 	copy_filemap_to_floodmap(y);

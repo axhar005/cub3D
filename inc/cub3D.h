@@ -57,7 +57,7 @@ void validate_map(void);
 void transform_map(void);
 int calc_map_size(int size);
 void make_final_map(void);
-int loc_start_map(int y, int x);
+int loc_start_map(char *trimmed, int y, int x);
 void map(void);
 // flood map
 void flood_fill(int y, int x, int map_width, int map_height);
