@@ -32,7 +32,7 @@ INCDIR = inc
 
 #--- SOURCE ---#
 SRCDIR	=	src
-SRC		= 	main.c graphics/3d.c graphics/texture.c graphics/pixel.c graphics/movement.c graphics/view.c utilities/string.c 
+SRC		= 	main.c graphics/raycast_1.c graphics/raycast_2.c graphics/texture.c graphics/pixel.c graphics/movement.c graphics/view.c utilities/string.c 
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#

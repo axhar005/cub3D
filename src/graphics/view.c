@@ -12,7 +12,8 @@ void	rotate_view(double theta)
 	old_plane_x = player->plane_x;
 	player->dir_x = player->dir_x * cos(theta) - player->dir_y * sin(theta);
 	player->dir_y = old_dir_x * sin(theta) + player->dir_y * cos(theta);
-	player->plane_x = player->plane_x * cos(theta) - player->plane_y * sin(theta);
+	player->plane_x = player->plane_x * cos(theta)
+		- player->plane_y * sin(theta);
 	player->plane_y = old_plane_x * sin(theta) + player->plane_y * cos(theta);
 }
 

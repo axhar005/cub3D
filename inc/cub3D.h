@@ -37,8 +37,8 @@ typedef struct s_raycast
 	int				drawStart;
 	int				drawEnd;
 	int				texNum;
-	int tex_x;
-	int tex_y;
+	int				tex_x;
+	int				tex_y;
 
 	int				map_x;
 	int				map_y;
@@ -46,8 +46,8 @@ typedef struct s_raycast
 	int				step_y;
 	int				hit;
 	int				side;
-	uint32_t color;
-	uint32_t new_color;
+	uint32_t		color;
+	uint32_t		new_color;
 }					t_raycast;
 
 typedef struct s_player
@@ -112,5 +112,10 @@ void				change_player_dir(t_player *player, char c);
 void				set_background(mlx_image_t *image, uint32_t roof_color,
 						uint32_t floor_color);
 void				rotate_view(double theta);
+void				cal_side_dist_x(t_player *player);
+void				cal_side_dist_y(t_player *player);
+void				dda(void);
+void				wall_height(t_player *player);
+void				calum_dist(void);
 
 #endif
