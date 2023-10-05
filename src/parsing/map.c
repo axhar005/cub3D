@@ -75,46 +75,52 @@ int	calc_map_size(int size)
 void	alloc_final_map(void)
 {
 	int	size;
-	int	new_size;
 
 	size = ft_2darr_len(g()->map);
-	new_size = calc_map_size(size);
-	g()->final_map = (int **)calloc(new_size, sizeof(int *));
+	g()->parsing.final_map_size = calc_map_size(size);
+	g()->final_map = (int **)calloc(g()->parsing.final_map_size, sizeof(int *));
 	if (!g()->final_map)
 		ft_exit_free("Calloc failed");
 }
 
 void	make_final_map(void)
 {
-	int	line;
 	int	x;
 	int	y;
 	int	newY;
-	int	size;
-	int	new_size;
 
-	y = 0;
+	y = -1;
 	newY = 0;
-	size = ft_2darr_len(g()->map);
-	new_size = calc_map_size(size);
-	y = 0;
-	newY = 0;
-	line = find_longest_line(g()->map);
+	g()->parsing.final_map_longest_line = find_longest_line(g()->map);
 	alloc_final_map();
-	while (g()->map[y])
+	while (g()->map[++y])
 	{
 		if (strchr(g()->map[y], '1'))
 		{
-			g()->final_map[newY] = (int *)calloc(line, sizeof(int));
+			g()->final_map[newY] = (int *)calloc(g()->parsing.final_map_longest_line,
+				sizeof(int));
 			if (!g()->final_map[newY])
 				ft_exit_free("Calloc failed");
 			x = -1;
 			while (g()->map[y][++x])
-				g()->final_map[newY][x] = (g()->map[y][x] == '1') ? 1 : 0;
+			{
+				if (g()->map[y][x] == '1')
+					g()->final_map[newY][x] = 1;
+				else
+					g()->final_map[newY][x] = 0;
+			}
 			newY++;
 		}
-		y++;
 	}
+	/* printf("--- FINAL MAP ---\n");
+	for (int i = 0; i < g()->parsing.final_map_size; i++)
+	{
+		for (int j = 0; j < g()->parsing.final_map_longest_line; j++)
+		{
+			printf("%d", g()->final_map[i][j]);
+		}
+		printf("\n");
+	} */
 }
 
 int	loc_start_map(char *trimmed, int y, int x)

@@ -52,7 +52,8 @@ void	store_file(char *file)
 		ft_exit_free("FD failed");
 	while (count)
 	{
-		g()->file[i++] = get_next_line(fd);
+		g()->file[i] = get_next_line(fd);
+		i++;
 		count--;
 	}
 	if (i == 1)
@@ -63,10 +64,10 @@ void	store_file(char *file)
 void	pars_map(char *file)
 {
 	store_file(file);
-	find_nswe();
+	/* find_nswe();
 	find_colors();
 	if (g()->parsing.valid_map != 6)
 		ft_exit_free("Elements are not valid\n");
-	map();
+	map(); */
 	return ;
 }

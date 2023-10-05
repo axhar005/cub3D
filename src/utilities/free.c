@@ -3,19 +3,20 @@
 void	ft_2dint_free(int **tab)
 {
 	int	i;
-	int size;
+	int	size;
 
 	i = 0;
 	if (!tab)
 		return ;
-	size = ft_2darr_len(g()->map);
+	size = g()->parsing.final_map_size;
 	while (i < size)
 	{
-		free(tab[i]);
+		free(tab[i]);  // Free each sub-array (row)
 		i++;
 	}
-	free(tab);
+	free(tab);  // Free the array holding the pointers
 }
+
 
 void	ft_2darr_free(char **tab)
 {
@@ -32,7 +33,7 @@ void	ft_2darr_free(char **tab)
 	free(tab);
 }
 
-void	free_all()
+void	free_all(void)
 {
 	if (g()->flood_map)
 		ft_2darr_free(g()->flood_map);
@@ -40,8 +41,8 @@ void	free_all()
 		ft_2darr_free(g()->file);
 	if (g()->map)
 		ft_2darr_free(g()->map);
-	/* if (g()->final_map)
-		ft_2dint_free(g()->final_map); */
+	if (g()->final_map)
+		ft_2dint_free(g()->final_map);
 	if (g()->parsing.east)
 		free(g()->parsing.east);
 	if (g()->parsing.north)
@@ -52,10 +53,10 @@ void	free_all()
 		free(g()->parsing.south);
 }
 
-void    ft_exit_free(char *s)
+void	ft_exit_free(char *s)
 {
-    free_all();
-    if (s)
-        ft_putstr_fd(s, 2);
-    exit(EXIT_FAILURE);
+	free_all();
+	if (s)
+		ft_putstr_fd(s, 2);
+	exit(EXIT_FAILURE);
 }

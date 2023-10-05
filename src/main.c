@@ -17,6 +17,11 @@ void	check_extension(char *map)
 		ft_exit("Wrong type of file");
 }
 
+void	init_struct()
+{
+	g()->file = NULL;
+}
+
 void	ft_2darr_print(char **tb, int fd)
 {
 	int	i;
@@ -36,14 +41,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
+	init_struct();
 	pars_map(av[1]);
-	printf("NORD %s\n", g()->parsing.north);
-	printf("SOUTH %s\n", g()->parsing.south);
-	printf("WEST %s\n", g()->parsing.west);
-	printf("EAST %s\n", g()->parsing.east);
-	printf("COLOR F %lu\n", g()->parsing.color_f);
-	printf("COLOR C %lu\n", g()->parsing.color_c);
-	printf("DIR %c\n", g()->parsing.player_dir);
 	free_all();
 	return (0);
 }

@@ -79,7 +79,7 @@ fclean:	clean
 	@echo "$(NAME)$(GREEN) object files and executable successfully removed 🗑.$(RESET)"
 
 leaks : all
-	@valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map1.cub
+	@valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map.cub
 
 re:	fclean all
 

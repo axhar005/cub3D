@@ -28,6 +28,8 @@ typedef struct s_parsing
 	char			player_dir;
 	t_pos			player_pos;
 	int				valid_map;
+	int				final_map_size;
+	int				final_map_longest_line;
 }					t_parsing;
 
 typedef struct s_global
