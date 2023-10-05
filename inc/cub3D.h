@@ -21,14 +21,43 @@
 
 // struct
 
+typedef struct s_raycast
+{
+	double			camera_x;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			side_dist_x;
+	double			side_dist_y;
+
+	double			perpWallDist;
+	double			wallX;
+	int				lineHeight;
+	int				drawStart;
+	int				drawEnd;
+	int				texNum;
+	int tex_x;
+	int tex_y;
+
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	uint32_t color;
+	uint32_t new_color;
+}					t_raycast;
+
 typedef struct s_player
 {
-	double			posX;
-	double			posY;
-	double			dirX;
-	double			dirY;
-	double			planeX;
-	double			planeY;
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 	double			move_speed;
 }					t_player;
 
@@ -57,6 +86,7 @@ typedef struct s_global
 	t_player		player;
 	double			delta_time;
 	t_parsing		*parsing;
+	t_raycast		raycast;
 }					t_global;
 
 // prototype

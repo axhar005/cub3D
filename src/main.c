@@ -50,12 +50,12 @@ int	main(int ac, char **av)
 		}
 	}
 
-	g()->player.posX = 1.5;
-	g()->player.posY = 1.5;
-	g()->player.planeX = 0;
-	g()->player.planeY = 0.66;
-	g()->player.dirX = -1;
-	g()->player.dirY = 0;
+	g()->player.pos_x = 1.5;
+	g()->player.pos_y = 1.5;
+	g()->player.plane_x = 0;
+	g()->player.plane_y = 0.66;
+	g()->player.dir_x = -1;
+	g()->player.dir_y = 0;
 	g()->player.move_speed = 0.03;
 
 	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);

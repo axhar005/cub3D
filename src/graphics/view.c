@@ -8,12 +8,12 @@ void	rotate_view(double theta)
 	double		old_plane_x;
 
 	player = &g()->player;
-	old_dir_x = player->dirX;
-	old_plane_x = player->planeX;
-	player->dirX = player->dirX * cos(theta) - player->dirY * sin(theta);
-	player->dirY = old_dir_x * sin(theta) + player->dirY * cos(theta);
-	player->planeX = player->planeX * cos(theta) - player->planeY * sin(theta);
-	player->planeY = old_plane_x * sin(theta) + player->planeY * cos(theta);
+	old_dir_x = player->dir_x;
+	old_plane_x = player->plane_x;
+	player->dir_x = player->dir_x * cos(theta) - player->dir_y * sin(theta);
+	player->dir_y = old_dir_x * sin(theta) + player->dir_y * cos(theta);
+	player->plane_x = player->plane_x * cos(theta) - player->plane_y * sin(theta);
+	player->plane_y = old_plane_x * sin(theta) + player->plane_y * cos(theta);
 }
 
 void	player_rotation(void)
@@ -37,10 +37,10 @@ void	player_rotation(void)
 static void	set_player_dir(double dir_x, double dir_y, double plane_x,
 		double plane_y)
 {
-	g()->player.dirX = dir_x;
-	g()->player.dirY = dir_y;
-	g()->player.planeX = plane_x;
-	g()->player.planeY = plane_y;
+	g()->player.dir_x = dir_x;
+	g()->player.dir_y = dir_y;
+	g()->player.plane_x = plane_x;
+	g()->player.plane_y = plane_y;
 }
 
 void	change_player_dir(t_player *player, char c)
