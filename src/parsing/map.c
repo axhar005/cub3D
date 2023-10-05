@@ -16,15 +16,17 @@ void	validate_map(void)
 			c = g()->flood_map[y][x];
 			if (c == 'N' || c == 'W' || c == 'E' || c == 'S')
 			{
-				g()->parsing.player_dir = c;
+				if (!g()->parsing.player_dir)
+					g()->parsing.player_dir = c;
+				else
+					ft_exit_free("Only one player permitted\n");
 				g()->parsing.player_pos.x = x;
 				g()->parsing.player_pos.y = y;
 			}
 			else if (c != '1' && c != '0' && c != '\n' && c != '\0'
 				&& !ft_isspace(c))
 			{
-				printf("ERROR = %c\n", g()->flood_map[y][x]);
-				ft_exit_free("Parsing map error = \n");
+				ft_exit_free("Parsing map error\n");
 			}
 		}
 	}
@@ -117,9 +119,9 @@ void	make_final_map(void)
 
 int	loc_start_map(char *trimmed, int y, int x)
 {
-	(void)y;
 	int	is_map_line;
 
+	(void)y;
 	is_map_line = 0;
 	while (trimmed[x] != '\0' && trimmed[x] != '\n')
 	{
