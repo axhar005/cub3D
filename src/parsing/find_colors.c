@@ -52,18 +52,20 @@ void	find_colors(void)
 	i = 0;
 	while (g()->file[i])
 	{
-		if (ft_strncmp(g()->file[i], "F", 1) == 0)
+		char *trimmed_str = ft_strtrim(g()->file[i], " ");
+		if (ft_strncmp(trimmed_str, "F", 1) == 0 && (trimmed_str[1] == ' '))
 		{
-			color_f = extract_path(g()->file[i]);
+			color_f = extract_path(trimmed_str);
 			g()->parsing.color_f = rgba_to_store(color_f);
 			g()->parsing.valid_map++;
 		}
-		else if (ft_strncmp(g()->file[i], "C", 1) == 0)
+		else if (ft_strncmp(trimmed_str, "C", 1) == 0 && (trimmed_str[1] == ' '))
 		{
-			color_c = extract_path(g()->file[i]);
+			color_c = extract_path(trimmed_str);
 			g()->parsing.color_c = rgba_to_store(color_c);
 			g()->parsing.valid_map++;
 		}
+		free(trimmed_str);
 		i++;
 	}
 }

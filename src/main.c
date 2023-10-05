@@ -37,6 +37,13 @@ int	main(int ac, char **av)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
 	pars_map(av[1]);
+	printf("NORD %s\n", g()->parsing.north);
+	printf("SOUTH %s\n", g()->parsing.south);
+	printf("WEST %s\n", g()->parsing.west);
+	printf("EAST %s\n", g()->parsing.east);
+	printf("COLOR F %lu\n", g()->parsing.color_f);
+	printf("COLOR C %lu\n", g()->parsing.color_c);
+	printf("DIR %c\n", g()->parsing.player_dir);
 	free_all();
 	return (0);
 }

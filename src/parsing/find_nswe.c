@@ -35,6 +35,7 @@ char	*extract_path(char *string)
 	return (path);
 }
 
+
 void	find_nswe(void)
 {
 	int i;
@@ -42,22 +43,24 @@ void	find_nswe(void)
 	i = 0;
 	while (g()->file[i])
 	{
-		if (ft_strncmp(g()->file[i], "NO", 2) == 0) {
-			g()->parsing.north = extract_path(g()->file[i]);
+		char *trimmed_str = ft_strtrim(g()->file[i], " ");
+		if (ft_strncmp(trimmed_str, "NO", 2) == 0 && (trimmed_str[2] == ' ')) {
+			g()->parsing.north = extract_path(trimmed_str);
 			g()->parsing.valid_map++;
 		}
-		else if (ft_strncmp(g()->file[i], "SO", 2) == 0) {
-			g()->parsing.south = extract_path(g()->file[i]);
+		else if (ft_strncmp(trimmed_str, "SO", 2) == 0 && (trimmed_str[2] == ' ')) {
+			g()->parsing.south = extract_path(trimmed_str);
 			g()->parsing.valid_map++;
 		}
-		else if (ft_strncmp(g()->file[i], "WE", 2) == 0) {
-			g()->parsing.valid_map++;
-			g()->parsing.west = extract_path(g()->file[i]);
-		}
-		else if (ft_strncmp(g()->file[i], "EA", 2) == 0) {
-			g()->parsing.east = extract_path(g()->file[i]);
+		else if (ft_strncmp(trimmed_str, "WE", 2) == 0 && (trimmed_str[2] == ' ')) {
+			g()->parsing.west = extract_path(trimmed_str);
 			g()->parsing.valid_map++;
 		}
+		else if (ft_strncmp(trimmed_str, "EA", 2) == 0 && (trimmed_str[2] == ' ')) {
+			g()->parsing.east = extract_path(trimmed_str);
+			g()->parsing.valid_map++;
+		}
+		free(trimmed_str);
 		i++;
 	}
 }

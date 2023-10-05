@@ -55,6 +55,8 @@ void	store_file(char *file)
 		g()->file[i++] = get_next_line(fd);
 		count--;
 	}
+	if (i == 1)
+			ft_exit_free("Empty map\n");
 	close(fd);
 }
 

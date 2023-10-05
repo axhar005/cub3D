@@ -7,6 +7,7 @@ void validate_map(void)
 	int c;
 
 	y = -1;
+	/* ft_2darr_print(g()->flood_map, 1); */
 	while (g()->flood_map[++y])
 	{
 		x = -1;
@@ -79,10 +80,15 @@ void alloc_final_map()
 void make_final_map(void)
 {
 	int line;
-
 	int x;
 	int y = 0;
 	int newY = 0;
+
+	int size;
+	int new_size;
+
+	size = ft_2darr_len(g()->map);
+	new_size = calc_map_size(size);
 
 	y = 0;
 	newY = 0;
@@ -102,8 +108,7 @@ void make_final_map(void)
 		}
 		y++;
 	}
-
-	/* printf("--- FINAL MAP ---\n");
+	printf("--- FINAL MAP ---\n");
 	for (int i = 0; i < new_size; i++)
 	{
 		for (int j = 0; j < line; j++)
@@ -111,7 +116,7 @@ void make_final_map(void)
 			printf("%d", g()->final_map[i][j]);
 		}
 		printf("\n");
-	} */
+	}
 }
 
 int loc_start_map(int y, int x)
@@ -120,7 +125,7 @@ int loc_start_map(int y, int x)
 
 	is_map_line = 0;
 	if (g()->file[y][x] == '\0' || g()->file[y][x] == ' ')
-		return 0;
+		return 1;
 	while (g()->file[y][x] != '\0' && g()->file[y][x] != '\n')
 	{
 		if (g()->file[y][x] != '0' && g()->file[y][x] != '1')
