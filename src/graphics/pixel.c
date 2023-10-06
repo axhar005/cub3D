@@ -1,8 +1,8 @@
 
 #include "../../inc/cub3D.h"
 
-void	set_background(mlx_image_t *image, uint32_t roof_color,
-		uint32_t floor_color)
+void	set_background(mlx_image_t *image, uint32_t floor_color,
+		uint32_t roof_color)
 {
 	int	x1;
 	int	y1;

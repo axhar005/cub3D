@@ -2,8 +2,8 @@ NO ./asset/stone.png
 SO ./asset/wall.png
 WE ./asset/Stones_Texture.png
 EA ./asset/Brickwall6_Texture.png
-F 255,255,255
-C 0,0,0
+F 153,76,0
+C 32,32,32
 
 
 1111111111111111111111111

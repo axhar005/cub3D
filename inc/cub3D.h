@@ -159,8 +159,8 @@ void				player_rotation(void);
 void				load_init_texture(void);
 void				raycast(t_player player, mlx_image_t *image);
 void				change_player_dir(t_player *player, char c);
-void				set_background(mlx_image_t *image, uint32_t roof_color,
-						uint32_t floor_color);
+void				set_background(mlx_image_t *image, uint32_t floor_color,
+						uint32_t roof_color);
 void				rotate_view(double theta);
 void				cal_side_dist_x(t_player *player);
 void				cal_side_dist_y(t_player *player);
