@@ -22,24 +22,24 @@
 git clone https://github.com/demenciel/cub3D.git
 
 3. Compile the project:
-````
+```
 make
-````
+```
 
 
 ## Usage
 
 Run the program with:
 
-````
+```
 ./cub3D [map_file.cub]
-`````
+```
 
 or
 
-````
+```
 make run
-``
+```
 
 ## Code Organization
 
