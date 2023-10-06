@@ -11,18 +11,21 @@ t_global	*g(void)
 void	step(void *param)
 {
 	static double	frame;
+	t_global *gl;
+
 
 	(void)param;
-	g()->delta_time = g()->mlx->delta_time * 30;
+	gl = g();
+	gl->delta_time = gl->mlx->delta_time * FPS;
 	if (frame >= 1)
 	{
-		set_background(g()->image, 0x615445FF, 0x3b3a3aFF);
-		raycast(g()->player, g()->image);
-		change_player_dir(&g()->player, 'W');
+		set_background(gl->image, 0x615445FF, 0x3b3a3aFF);
+		raycast(gl->player, gl->image);
+		change_player_dir(&gl->player, 'W');
 		player_rotation();
 		player_movement();
 	}
-	frame += g()->delta_time;
+	frame += gl->delta_time;
 }
 
 int	main(int ac, char **av)
