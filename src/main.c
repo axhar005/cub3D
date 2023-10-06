@@ -43,6 +43,15 @@ int	main(int ac, char **av)
 	check_extension(av[1]);
 	init_struct();
 	pars_map(av[1]);
+	printf("--- FINAL MAP ---\n");
+	for (int i = 0; i < g()->parsing.final_map_size; i++)
+	{
+		for (int j = 0; j < g()->parsing.final_map_longest_line; j++)
+		{
+			printf("%d", g()->final_map[i][j]);
+		}
+		printf("\n");
+	}
 	free_all();
 	return (0);
 }
