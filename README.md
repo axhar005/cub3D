@@ -44,7 +44,15 @@ make run
 ## Code Organization
 
 - `src/`: Contains the source code files for the main functionality.
-- `includes/`: Header files and global variable declarations.
+    - `src/parsing/`: Contains the code for the parsing of the map file.
+        - `src/parsing/final_map.c`: Creates a map `2d int array`, to be passed to the MLX
+        - `src/parsing/find_colors.c`: Parse the input file to get the RGBA colors
+        - `src/parsing/find_nswe.c`: Parse the input file to get the textures sources
+        - `src/parsing/find_width_height.c`: Functions to get the actual size of the map
+        - `src/parsing/flood_map.c`: A flood fill implementation to check if map is valid
+        - `src/parsing/open_read.c`: Create a copy of the content of the input file
+- `inc/`: Header files and global variable declarations.
+- `lib/libft`: A custom library `libft` of basic C functions.
 - `assets/`: Textures, sprites, and other graphical assets.
 - `maps/`: Game map files in `.cub` format.
 - `Makefile`: Script for compiling the project.
