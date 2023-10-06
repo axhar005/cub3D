@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/06 12:34:33 by oboucher          #+#    #+#              #
-#    Updated: 2023/10/02 14:51:11 by oboucher         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 # ➜  ~ git clone https://github.com/codam-coding-college/MLX42.git
 # ➜  ~ cd MLX42
@@ -22,7 +11,7 @@ LIBFT = libft.a
 
 #--- COMMAND VARIABLES ---#
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -f
 AR = ar rcs
 MK = mkdir -p
@@ -43,7 +32,16 @@ INCDIR = inc
 
 #--- SOURCE ---#
 SRCDIR	=	src
-SRC		= 	main.c
+SRC		= 	main.c \
+			utilities/free.c \
+			utilities/string.c \
+			utilities/2darray.c \
+			parsing/open_read.c \
+			parsing/find_nswe.c \
+			parsing/find_colors.c \
+			parsing/flood_map.c \
+			parsing/map.c \
+			parsing/final_map.c 
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
@@ -55,24 +53,20 @@ $(OBJDIR)/%.o:	%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INCDIR) -I. -c $< -o $@
 	
-all:	mlx42 libft $(NAME)
-	
-${NAME}:	$(OBJDIR) $(OBJ)
-	@$(CC) $(CFLAGS) $(MLXFLAGS) -I$(INCDIR) -o $(NAME) $(MLX) $(OBJ) $(LDIR)$(LIBFT)
-	@echo "$(NAME)$(GREEN) sucessefully compiled 📁.$(RESET)"
+all: libft $(NAME)
 
 $(OBJDIR):
 	@$(MK) $(OBJDIR)
-
-mlx42:
-	@cmake lib/MLX42_/ -B lib/MLX42_/build
-	@cmake --build lib/MLX42_/build -j4
+	
+${NAME}:	$(OBJDIR) $(OBJ)
+	@$(CC) $(CFLAGS) -I$(INCDIR) -o $(NAME) $(OBJ) $(LDIR)$(LIBFT)
+	@echo "$(NAME)$(GREEN) sucessefully compiled 📁.$(RESET)"
 	
 libft:
 	@$(MAKE) -C $(LDIR)
 
 run:	all
-	@./$(NAMES)
+	@./$(NAME) map.cub
 	
 clean:
 	@$(MAKE) -C $(LDIR) clean
@@ -84,6 +78,9 @@ fclean:	clean
 	@$(MAKE) -C $(LDIR) fclean
 	@$(RM) $(NAME)
 	@echo "$(NAME)$(GREEN) object files and executable successfully removed 🗑.$(RESET)"
+
+leaks : all
+	@valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map.cub
 
 re:	fclean all
 
