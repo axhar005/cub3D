@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 14:53:09 by acouture          #+#    #+#             */
+/*   Updated: 2023/10/06 14:53:10 by acouture         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	validate_map(void)
@@ -74,6 +86,8 @@ void	exec_map(int y)
 {
 	copy_filemap_to_floodmap(y);
 	validate_map();
+	if (!g()->parsing.player_dir)
+		ft_exit_free("No player detected\n");
 	flood_the_map();
 	copy_floodmap_to_map();
 	transform_map();

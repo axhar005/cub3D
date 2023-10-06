@@ -43,8 +43,8 @@ void step(void)
 
 int	main(int ac, char **av)
 {
-    int width = 100;
-    int height = 100;
+   /*  int width = 100;
+    int height = 100; */
 
 	if (ac != 2)
 		ft_exit("Wrong number of arguments");
@@ -55,6 +55,14 @@ int	main(int ac, char **av)
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);
 	mlx_terminate(g()->mlx); */
+	for (int i = 0; i < g()->parsing.final_map_size; i++)
+	{
+		for (int j = 0; j < g()->parsing.final_map_longest_line; j++)
+		{
+			printf("%d", g()->final_map[i][j]);
+		}
+		printf("\n");
+	}
 	free_all();
 	return (0);
 }

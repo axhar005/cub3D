@@ -80,7 +80,12 @@ int					calc_map_size(int size);
 void				make_final_map(void);
 void				calloc_final_map_line(int new_y);
 void				alloc_final_map(void);
-
+// find width height
+int					find_first_non_space(char *row);
+int					find_last_non_space(char *row);
+bool				row_contains_non_space(char *row);
+int					find_effective_width(char **map);
+int					find_effective_height(char **map);
 // flood map
 void				flood_fill(int y, int x, int map_width, int map_height);
 void				copy_filemap_to_floodmap(int index);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flood_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 14:53:05 by acouture          #+#    #+#             */
+/*   Updated: 2023/10/06 14:53:05 by acouture         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/cub3D.h"
 
 void	flood_fill(int y, int x, int map_width, int map_height)
@@ -58,9 +70,9 @@ void	flood_the_map(void)
 	int	map_width;
 	int	map_height;
 
-	map_width = find_longest_line(g()->flood_map);
-	map_height = ft_2darr_len(g()->flood_map);
-	if (map_width > 60 || map_height > 60)
+	map_width = find_effective_width(g()->flood_map);
+	map_height = find_effective_height(g()->flood_map);
+	if (map_width > 100 || map_height > 100)
 		ft_exit_free("MAP OVERFLOW\n");
 	flood_fill(g()->parsing.player_pos.y, g()->parsing.player_pos.x, map_width,
 		map_height);
