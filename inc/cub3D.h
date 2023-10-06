@@ -30,6 +30,7 @@ typedef struct s_parsing
 	int				valid_map;
 	int				final_map_size;
 	int				final_map_longest_line;
+	char			*error_flag;
 }					t_parsing;
 
 typedef struct s_global
@@ -92,7 +93,7 @@ void				copy_filemap_to_floodmap(int index);
 void				copy_floodmap_to_map(void);
 void				flood_the_map(void);
 // open read
-void				pars_map(char *map);
+void				pars_file(char *map);
 void				check_extension(char *map);
 void				store_file(char *file);
 int					open_file(char *file);

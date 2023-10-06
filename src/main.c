@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
 	init_struct();
-	pars_map(av[1]);
+	pars_file(av[1]);
 	/* g()->mlx = mlx_init(width, height, "NAME", false);
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);

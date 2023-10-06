@@ -6,7 +6,7 @@
 /*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:55:48 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 14:55:49 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:07:21 by acouture         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ void	store_file(char *file)
 	close(fd);
 }
 
-void	pars_map(char *file)
+void	pars_file(char *file)
 {
 	store_file(file);
 	find_nswe();
 	find_colors();
 	if (g()->parsing.valid_map != 6)
-		ft_exit_free("Elements are not valid\n");
+		ft_exit_free("Elements are not valid and/or missing\n");
 	map();
 	return ;
 }
