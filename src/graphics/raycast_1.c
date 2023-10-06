@@ -64,7 +64,7 @@ void	dda(void)
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (g()->map[raycast->map_x][raycast->map_y] > 0)
+		if (g()->final_map[raycast->map_x][raycast->map_y] > 0)
 			raycast->hit = 1;
 	}
 }

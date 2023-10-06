@@ -48,8 +48,7 @@ SRC		= 	main.c \
 			graphics/texture.c \
 			graphics/pixel.c \
 			graphics/movement.c \
-			graphics/view.c \
-			utilities/string.c 
+			graphics/view.c
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
@@ -61,15 +60,19 @@ $(OBJDIR)/%.o:	%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I$(INCDIR) -I. -c $< -o $@
 	
-all: libft $(NAME)
+all: libft mlx42 $(NAME)
 
 $(OBJDIR):
 	@$(MK) $(OBJDIR)
 	
 ${NAME}:	$(OBJDIR) $(OBJ)
-	@$(CC) $(CFLAGS) -I$(INCDIR) -o $(NAME) $(OBJ) $(LDIR)$(LIBFT)
+	@$(CC) $(CFLAGS) $(MLXFLAGS) -I$(INCDIR) -o $(NAME) $(MLX) $(OBJ) $(LDIR)$(LIBFT)
 	@echo "$(NAME)$(GREEN) sucessefully compiled 📁.$(RESET)"
-	
+
+mlx42:
+	@cmake lib/MLX42_/ -B lib/MLX42_/build
+	@cmake --build lib/MLX42_/build -j4
+
 libft:
 	@$(MAKE) -C $(LDIR)
 

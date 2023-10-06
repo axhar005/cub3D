@@ -17,6 +17,25 @@ void	check_extension(char *map)
 		ft_exit("Wrong type of file");
 }
 
+void	init_struct()
+{
+	g()->file = NULL;
+}
+
+void	ft_2darr_print(char **tb, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (tb[i])
+	{
+		ft_putstr_fd(tb[i], fd);
+		printf("\n");
+		i++;
+	}
+	printf("\n");
+}
+
 void	step(void *param)
 {
 	static double	frame;
@@ -37,30 +56,6 @@ void	step(void *param)
 	frame += gl->delta_time;
 }
 
-void	init_struct()
-{
-	g()->file = NULL;
-}
-
-void	ft_2darr_print(char **tb, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (tb[i])
-	{
-		ft_putstr_fd(tb[i], fd);
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-}
-
-void step(void)
-{
-    //
-}
-
 int	main(int ac, char **av)
 {
 	if (ac != 2)
@@ -76,24 +71,22 @@ int	main(int ac, char **av)
 	// 	}
 	// 	printf("\n");
 	// }
+
+	// g()->player.pos_x = 1.5;
+	// g()->player.pos_y = 1.5;
+	// g()->player.plane_x = 0;
+	// g()->player.plane_y = 0.66;
+	// g()->player.dir_x = -1;
+	// g()->player.dir_y = 0;
+	// g()->player.move_speed = 0.03;
+	// g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
+	// g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
+	// mlx_image_to_window(g()->mlx, g()->image, 0, 0);
+	// load_init_texture();
+	// mlx_loop_hook(g()->mlx, step, NULL);
+	// mlx_loop(g()->mlx);
+	// mlx_terminate(g()->mlx);
+
 	free_all();
-
-	g()->player.pos_x = 1.5;
-	g()->player.pos_y = 1.5;
-	g()->player.plane_x = 0;
-	g()->player.plane_y = 0.66;
-	g()->player.dir_x = -1;
-	g()->player.dir_y = 0;
-	g()->player.move_speed = 0.03;
-
-	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
-	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
-	mlx_image_to_window(g()->mlx, g()->image, 0, 0);
-	load_init_texture();
-
-	mlx_loop_hook(g()->mlx, step, NULL);
-	mlx_loop(g()->mlx);
-	mlx_terminate(g()->mlx);
-
 	return (EXIT_SUCCESS);
 }

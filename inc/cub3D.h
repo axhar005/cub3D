@@ -1,10 +1,9 @@
-
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
 // include
 # include "../lib/libft_/inc/libft.h"
+# include "../lib/MLX42_/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -31,7 +30,6 @@ typedef struct s_raycast
 	double			delta_dist_y;
 	double			side_dist_x;
 	double			side_dist_y;
-
 	double			perpWallDist;
 	double			wallX;
 	int				lineHeight;
@@ -40,7 +38,6 @@ typedef struct s_raycast
 	int				texNum;
 	int				tex_x;
 	int				tex_y;
-
 	int				map_x;
 	int				map_y;
 	int				step_x;
@@ -95,10 +92,8 @@ typedef struct s_global
 	mlx_t			*mlx;
 	mlx_texture_t	*texture[4];
 	mlx_image_t		*image;
-	int				map[10][10];
 	t_player		player;
 	double			delta_time;
-	t_parsing		*parsing;
 	t_raycast		raycast;
 }					t_global;
 
