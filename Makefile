@@ -66,7 +66,7 @@ libft:
 	@$(MAKE) -C $(LDIR)
 
 run:	all
-	@./$(NAME) map.cub
+	@./$(NAME) maps/map.cub
 	
 clean:
 	@$(MAKE) -C $(LDIR) clean

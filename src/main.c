@@ -51,10 +51,10 @@ int	main(int ac, char **av)
 	check_extension(av[1]);
 	init_struct();
 	pars_map(av[1]);
-	g()->mlx = mlx_init(width, height, "NAME", false);
+	/* g()->mlx = mlx_init(width, height, "NAME", false);
 	mlx_loop_hook(g()->mlx, step, NULL);
 	mlx_loop(g()->mlx);
-	mlx_terminate(g()->mlx);
+	mlx_terminate(g()->mlx); */
 	free_all();
 	return (0);
 }
