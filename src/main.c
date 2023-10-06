@@ -47,7 +47,7 @@ void	step(void *param)
 	gl->delta_time = gl->mlx->delta_time * FPS;
 	if (frame >= 1)
 	{
-		set_background(gl->image, 0x615445FF, 0x3b3a3aFF);
+		set_background(gl->image, g()->parsing.color_c, g()->parsing.color_f);
 		raycast(gl->player, gl->image);
 		change_player_dir(&gl->player, 'W');
 		player_rotation();
@@ -63,29 +63,30 @@ int	main(int ac, char **av)
 	check_extension(av[1]);
 	init_struct();
 	pars_file(av[1]);
-	// for (int i = 0; i < g()->parsing.final_map_size; i++)
-	// {
-	// 	for (int j = 0; j < g()->parsing.final_map_longest_line; j++)
-	// 	{
-	// 		printf("%d", g()->final_map[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
+	for (int i = 0; i < g()->parsing.final_map_size; i++)
+	{
+		for (int j = 0; j < g()->parsing.final_map_longest_line; j++)
+		{
+			printf("%d", g()->final_map[i][j]);
+		}
+		printf("\n");
+	}
 
-	// g()->player.pos_x = 1.5;
-	// g()->player.pos_y = 1.5;
-	// g()->player.plane_x = 0;
-	// g()->player.plane_y = 0.66;
-	// g()->player.dir_x = -1;
-	// g()->player.dir_y = 0;
-	// g()->player.move_speed = 0.03;
-	// g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
-	// g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
-	// mlx_image_to_window(g()->mlx, g()->image, 0, 0);
-	// load_init_texture();
-	// mlx_loop_hook(g()->mlx, step, NULL);
-	// mlx_loop(g()->mlx);
-	// mlx_terminate(g()->mlx);
+	g()->player.pos_x = 1.5;
+	g()->player.pos_y = 1.5;
+	g()->player.plane_x = 0;
+	g()->player.plane_y = 0.66;
+	g()->player.dir_x = -1;
+	g()->player.dir_y = 0;
+	g()->player.move_speed = 0.03;
+
+	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
+	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
+	mlx_image_to_window(g()->mlx, g()->image, 0, 0);
+	load_init_texture();
+	mlx_loop_hook(g()->mlx, step, NULL);
+	mlx_loop(g()->mlx);
+	mlx_terminate(g()->mlx);
 
 	free_all();
 	return (EXIT_SUCCESS);

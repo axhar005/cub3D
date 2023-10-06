@@ -16,8 +16,8 @@
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
 # define MAX_ROT_SPEED 3
-# define HITBOX 0.4
-# define FPS 30
+# define HITBOX 0.2
+# define FPS 60
 
 // struct
 
