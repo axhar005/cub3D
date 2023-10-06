@@ -42,7 +42,14 @@ SRC		= 	main.c \
 			parsing/flood_map.c \
 			parsing/find_width_height.c \
 			parsing/map.c \
-			parsing/final_map.c 
+			parsing/final_map.c \
+			graphics/raycast_1.c \
+			graphics/raycast_2.c \
+			graphics/texture.c \
+			graphics/pixel.c \
+			graphics/movement.c \
+			graphics/view.c \
+			utilities/string.c 
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#
@@ -74,7 +81,10 @@ clean:
 	@$(RM) $(OBJ)
 	@$(RM)r $(OBJDIR)
 	@$(RM)r $(MLXDIR)
-	
+
+leaks : all
+    @valgrind --track-fds=yes --trace-children=yes --leak-check=full --show-leak-kinds=all --track-origins=yes --show-reachable=yes ./cub3D map.cub
+
 fclean:	clean	
 	@$(MAKE) -C $(LDIR) fclean
 	@$(RM) $(NAME)
