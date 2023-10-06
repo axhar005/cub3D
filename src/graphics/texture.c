@@ -20,7 +20,7 @@ void	load_init_texture(void)
 	gl = g();
 	g()->texture[0] = mlx_load_png(gl->parsing.north);
 	g()->texture[1] = mlx_load_png(gl->parsing.south);
-	g()->texture[2] = mlx_load_png(gl->parsing.east);
-	g()->texture[3] = mlx_load_png(gl->parsing.west);
+	g()->texture[2] = mlx_load_png(gl->parsing.west);
+	g()->texture[3] = mlx_load_png(gl->parsing.east);
 	valid_texture();
 }

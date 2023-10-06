@@ -51,11 +51,11 @@ void	change_player_dir(t_player *player, char c)
 	(void)player;
 	if (first == true)
 	{
-		if (c == 'S')
+		if (c == 'E')
 			set_player_dir(0, 1, 0.66, 0);
-		else if (c == 'E')
+		else if (c == 'N')
 			set_player_dir(-1, 0, 0, 0.66);
-		else if (c == 'W')
+		else if (c == 'S')
 			set_player_dir(1, 0, 0, -0.66);
 		else
 			set_player_dir(0, -1, -0.66, 0);

@@ -49,11 +49,11 @@ void	step(void *param)
 	{
 		set_background(gl->image, g()->parsing.color_c, g()->parsing.color_f);
 		raycast(gl->player, gl->image);
-		change_player_dir(&gl->player, 'W');
-		player_rotation();
-		player_movement();
+		change_player_dir(&gl->player, g()->parsing.player_dir);
 	}
 	frame += gl->delta_time;
+	player_rotation();
+	player_movement();
 }
 
 int	main(int ac, char **av)
@@ -72,8 +72,8 @@ int	main(int ac, char **av)
 		printf("\n");
 	}
 
-	g()->player.pos_x = 1.5;
-	g()->player.pos_y = 1.5;
+	g()->player.pos_x = g()->parsing.player_pos.y + 0.5;
+	g()->player.pos_y = g()->parsing.player_pos.x + 0.5;
 	g()->player.plane_x = 0;
 	g()->player.plane_y = 0.66;
 	g()->player.dir_x = -1;
