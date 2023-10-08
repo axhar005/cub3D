@@ -6,10 +6,10 @@ static void	w_s_movement(double *new_x, double *new_y, t_player *player,
 	if (mlx_is_key_down(gl->mlx, MLX_KEY_W))
 	{
 		*new_x = gl->player.pos_x + gl->player.dir_x * player->move_speed;
+		*new_y = gl->player.pos_y + gl->player.dir_y * player->move_speed;
 		if (gl->final_map[(int)(*new_x + gl->player.dir_x
 				* HITBOX)][(int)gl->player.pos_y] == 0)
 			gl->player.pos_x = *new_x;
-		*new_y = gl->player.pos_y + gl->player.dir_y * player->move_speed;
 		if (gl->final_map[(int)gl->player.pos_x][(int)(*new_y + gl->player.dir_y
 			* HITBOX)] == 0)
 			gl->player.pos_y = *new_y;
@@ -17,10 +17,10 @@ static void	w_s_movement(double *new_x, double *new_y, t_player *player,
 	if (mlx_is_key_down(gl->mlx, MLX_KEY_S))
 	{
 		*new_x = gl->player.pos_x - gl->player.dir_x * player->move_speed;
+		*new_y = gl->player.pos_y - gl->player.dir_y * player->move_speed;
 		if (gl->final_map[(int)(*new_x + gl->player.dir_x * -HITBOX)]
 			[(int)gl->player.pos_y] == 0)
 			gl->player.pos_x = *new_x;
-		*new_y = gl->player.pos_y - gl->player.dir_y * player->move_speed;
 		if (gl->final_map[(int)gl->player.pos_x]
 			[(int)(*new_y + gl->player.dir_y * -HITBOX)] == 0)
 			gl->player.pos_y = *new_y;

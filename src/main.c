@@ -40,16 +40,18 @@ void	step(void *param)
 {
 	static double	frame;
 	t_global *gl;
+	static long int j = 0;
 
 
 	(void)param;
 	gl = g();
 	gl->delta_time = gl->mlx->delta_time * FPS;
+	ft_printf("frame : %u\n", j++);
 	if (frame >= 1)
 	{
-		set_background(gl->image, g()->parsing.color_c, g()->parsing.color_f);
+		ft_bzero(gl->image->pixels, (VIEW_HEIGHT * VIEW_WIDTH) * sizeof(int));
 		raycast(gl->player, gl->image);
-		change_player_dir(&gl->player, g()->parsing.player_dir);
+		change_player_dir(&gl->player, gl->parsing.player_dir);
 	}
 	frame += gl->delta_time;
 	player_rotation();
@@ -58,6 +60,9 @@ void	step(void *param)
 
 int	main(int ac, char **av)
 {
+	t_global *gl;
+	
+	gl = g();
 	if (ac != 2)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
@@ -81,7 +86,10 @@ int	main(int ac, char **av)
 	g()->player.move_speed = 0.03;
 
 	g()->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
+	g()->background = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
 	g()->image = mlx_new_image(g()->mlx, VIEW_WIDTH, VIEW_HEIGHT);
+	mlx_image_to_window(g()->mlx, g()->background, 0, 0);
+	set_background(gl->background, gl->parsing.color_c, gl->parsing.color_f);
 	mlx_image_to_window(g()->mlx, g()->image, 0, 0);
 	load_init_texture();
 	mlx_loop_hook(g()->mlx, step, NULL);

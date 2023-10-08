@@ -1,13 +1,8 @@
 
 #include "../../inc/cub3D.h"
 
-void	cal_side_dist_x(t_player *player)
+void	cal_side_dist_x(t_player *player, t_raycast	*raycast)
 {
-	t_global	*gl;
-	t_raycast	*raycast;
-
-	gl = g();
-	raycast = &g()->raycast;
 	if (raycast->ray_dir_x < 0)
 	{
 		raycast->step_x = -1;
@@ -22,13 +17,8 @@ void	cal_side_dist_x(t_player *player)
 	}
 }
 
-void	cal_side_dist_y(t_player *player)
+void	cal_side_dist_y(t_player *player, t_raycast	*raycast)
 {
-	t_global	*gl;
-	t_raycast	*raycast;
-
-	gl = g();
-	raycast = &g()->raycast;
 	if (raycast->ray_dir_y < 0)
 	{
 		raycast->step_y = -1;
@@ -43,14 +33,9 @@ void	cal_side_dist_y(t_player *player)
 	}
 }
 
-void	dda(void)
+void	dda(t_global *gl, t_raycast	*raycast)
 {
-	t_global	*gl;
-	t_raycast	*raycast;
-
-	gl = g();
-	raycast = &g()->raycast;
-	while (raycast->hit == 0)
+	while (1)
 	{
 		if (raycast->side_dist_x < raycast->side_dist_y)
 		{
@@ -64,16 +49,13 @@ void	dda(void)
 			raycast->map_y += raycast->step_y;
 			raycast->side = 1;
 		}
-		if (g()->final_map[raycast->map_x][raycast->map_y] > 0)
-			raycast->hit = 1;
+		if (gl->final_map[raycast->map_x][raycast->map_y] == 1)
+			return ;
 	}
 }
 
-void	wall_height(t_player *player)
+void	wall_height(t_player *player, t_raycast	*raycast)
 {
-	t_raycast	*raycast;
-
-	raycast = &g()->raycast;
 	if (raycast->side == 0)
 		raycast->perpWallDist = (raycast->map_x - player->pos_x + (1
 					- raycast->step_x) / 2) / raycast->ray_dir_x;
@@ -83,11 +65,8 @@ void	wall_height(t_player *player)
 	raycast->lineHeight = (int)(VIEW_HEIGHT / raycast->perpWallDist);
 }
 
-void	calum_dist(void)
+void	calum_dist(t_raycast *raycast)
 {
-	t_raycast	*raycast;
-
-	raycast = &g()->raycast;
 	raycast->drawStart = -raycast->lineHeight / 2 + VIEW_HEIGHT / 2;
 	if (raycast->drawStart < 0)
 		raycast->drawStart = 0;

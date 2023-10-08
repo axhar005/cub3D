@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 12:09:03 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/06 17:31:43 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:01:48 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static int	init_check(int fd, t_var *var)
 /// @return the next line
 char	*get_next_line(int fd)
 {
-	static char *line[OPEN_MAX];
-	t_var var;
+	static char	*line[OPEN_MAX];
+	t_var		var;
 
 	if (init_check(fd, &var) == 0)
 		return (line[fd] = ft_sfree(line[fd]), NULL);

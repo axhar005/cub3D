@@ -2,8 +2,8 @@
 # define CUB3D_H
 
 // include
-# include "../lib/libft_/inc/libft.h"
 # include "../lib/MLX42_/include/MLX42/MLX42.h"
+# include "../lib/libft_/inc/libft.h"
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -16,8 +16,8 @@
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
 # define MAX_ROT_SPEED 3
-# define HITBOX 0.2
-# define FPS 30
+# define HITBOX 0.35
+# define FPS 60
 
 // struct
 
@@ -44,7 +44,7 @@ typedef struct s_raycast
 	int				step_y;
 	int				hit;
 	int				side;
-	uint32_t		color;
+	uint8_t		*color;
 	uint32_t		new_color;
 }					t_raycast;
 
@@ -92,6 +92,7 @@ typedef struct s_global
 	mlx_t			*mlx;
 	mlx_texture_t	*texture[4];
 	mlx_image_t		*image;
+	mlx_image_t		*background;
 	t_player		player;
 	double			delta_time;
 	t_raycast		raycast;
@@ -162,10 +163,10 @@ void				change_player_dir(t_player *player, char c);
 void				set_background(mlx_image_t *image, uint32_t floor_color,
 						uint32_t roof_color);
 void				rotate_view(double theta);
-void				cal_side_dist_x(t_player *player);
-void				cal_side_dist_y(t_player *player);
-void				dda(void);
-void				wall_height(t_player *player);
-void				calum_dist(void);
+void	cal_side_dist_x(t_player *player, t_raycast	*raycast);
+void	cal_side_dist_y(t_player *player, t_raycast	*raycast);
+void	dda(t_global *gl, t_raycast	*raycast);
+void	wall_height(t_player *player, t_raycast	*raycast);
+void	calum_dist(t_raycast *raycast);
 
 #endif
