@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:53:09 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 14:53:10 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:09:40 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	validate_map(void)
 				if (!g()->parsing.player_dir)
 					g()->parsing.player_dir = c;
 				else
-					ft_exit_free("Only one player permitted\n");
+					ft_exit_free("Only one player permitted\n", 2);
 				g()->parsing.player_pos.x = x;
 				g()->parsing.player_pos.y = y;
 			}
 			else if (c != '1' && c != '0' && c != '\n' && c != '\0'
 				&& !ft_isspace(c))
-				ft_exit_free("Parsing map error\n");
+				ft_exit_free("Parsing map error\n", 2);
 		}
 	}
 }
@@ -87,7 +87,7 @@ void	exec_map(int y)
 	copy_filemap_to_floodmap(y);
 	validate_map();
 	if (!g()->parsing.player_dir)
-		ft_exit_free("No player detected\n");
+		ft_exit_free("No player detected\n", 2);
 	flood_the_map();
 	copy_floodmap_to_map();
 	transform_map();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_nswe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:52:55 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 14:52:56 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:34:00 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ char	*extract_path(char *string)
 		return (NULL);
 	ft_strlcpy(path, &string[i], len + 1);
 	path[len] = '\0';
-	/* if (check_path(path) == -1)
-	{
-		ft_sfree(path);
-		ft_exit_free("Not a valid path\n");
-	} */
 	g()->parsing.valid_map++;
 	return (path);
 }

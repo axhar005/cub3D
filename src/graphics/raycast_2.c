@@ -18,32 +18,33 @@ static void	init_raycast(int x, t_player *player, t_raycast *raycast)
 	raycast->side = 0;
 }
 
-static	void cal_tex_x(t_player *player, t_global *gl, t_raycast *raycast)
+static void	cal_tex_x(t_player *player, t_global *gl, t_raycast *raycast)
 {
 	if (raycast->side == 0)
-		raycast->wallX = player->pos_y + raycast->perpWallDist
+		raycast->wall_x = player->pos_y + raycast->perp_wall
 			* raycast->ray_dir_y;
 	else
-		raycast->wallX = player->pos_x + raycast->perpWallDist
+		raycast->wall_x = player->pos_x + raycast->perp_wall
 			* raycast->ray_dir_x;
-	raycast->wallX -= floor(raycast->wallX);
-	raycast->tex_x = (int)(raycast->wallX
-			* (double)gl->texture[raycast->texNum]->width);
+	raycast->wall_x -= floor(raycast->wall_x);
+	raycast->tex_x = (int)(raycast->wall_x
+			* (double)gl->texture[raycast->tex_num]->width);
 }
 
-static	void draw_wall(int x, mlx_image_t *image, t_global *gl, t_raycast *raycast)
+static void	draw_wall(int x, mlx_image_t *image, t_global *gl
+	, t_raycast *raycast)
 {
 	int	d;
 	int	y;
 
-	y = raycast->drawStart;
-	while (y < raycast->drawEnd)
+	y = raycast->draw_start;
+	while (y < raycast->draw_end)
 	{
-		d = y * 256 - VIEW_HEIGHT * 128 + raycast->lineHeight * 128;
-		raycast->tex_y = ((d * gl->texture[raycast->texNum]->height)
-				/ raycast->lineHeight) / 256;
-		raycast->color = gl->texture[raycast->texNum]->pixels + (raycast->tex_y
-				* gl->texture[raycast->texNum]->width + raycast->tex_x) * 4;
+		d = y * 256 - VIEW_HEIGHT * 128 + raycast->line_height * 128;
+		raycast->tex_y = ((d * gl->texture[raycast->tex_num]->height)
+				/ raycast->line_height) / 256;
+		raycast->color = gl->texture[raycast->tex_num]->pixels + (raycast->tex_y
+				* gl->texture[raycast->tex_num]->width + raycast->tex_x) * 4;
 		raycast->new_color = rgba_color(raycast->color[0], raycast->color[1],
 				raycast->color[2], raycast->color[3]);
 		mlx_put_pixel(image, x, y, raycast->new_color);
@@ -53,8 +54,8 @@ static	void draw_wall(int x, mlx_image_t *image, t_global *gl, t_raycast *raycas
 
 void	raycast(t_player player, mlx_image_t *image)
 {
-	int	x;
-	t_global *gl;
+	int			x;
+	t_global	*gl;
 
 	x = 0;
 	gl = g();

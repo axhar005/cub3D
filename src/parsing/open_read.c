@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_read.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:55:48 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 15:07:21 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:28:24 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	store_file(char *file)
 	count = open_file(file);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-		ft_exit_free("FD failed");
+		ft_exit_free("FD failed", 2);
 	while (count)
 	{
 		g()->file[i] = get_next_line(fd);
@@ -71,8 +71,17 @@ void	store_file(char *file)
 		count--;
 	}
 	if (i == 1)
-		ft_exit_free("Empty map\n");
+		ft_exit_free("Empty map\n", 2);
 	close(fd);
+}
+
+void	check_extension(char *map)
+{
+	int	i;
+
+	i = ft_strlen(map) - 4;
+	if (ft_strncmp(&map[i], ".cub", 4) != 0)
+		ft_exit("Wrong type of file");
 }
 
 void	pars_file(char *file)
@@ -81,7 +90,7 @@ void	pars_file(char *file)
 	find_nswe();
 	find_colors();
 	if (g()->parsing.valid_map != 6)
-		ft_exit_free("Elements are not valid and/or missing\n");
+		ft_exit_free("Elements are not valid and/or missing\n", 2);
 	map();
 	return ;
 }

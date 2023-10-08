@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:52:46 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 14:52:47 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:08:57 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	alloc_final_map(void)
 	final_map_size = calc_map_size(size);
 	gl->final_map = ft_calloc(final_map_size, sizeof(int *));
 	if (!gl->final_map)
-		ft_exit_free("Calloc failed");
+		ft_exit_free("Calloc failed", 2);
 	gl->parsing.final_map_size = final_map_size;
 	gl->parsing.final_map_longest_line = find_longest_line(g()->map);
 }
@@ -53,7 +53,7 @@ void	calloc_final_map_line(int new_y)
 	gl->final_map[new_y] = (int *)calloc(gl->parsing.final_map_longest_line,
 			sizeof(int));
 	if (!gl->final_map[new_y])
-		ft_exit_free("Calloc failed");
+		ft_exit_free("Calloc failed", 2);
 }
 
 void	make_final_map(void)

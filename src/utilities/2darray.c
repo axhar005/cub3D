@@ -2,24 +2,24 @@
 
 int	find_longest_line(char **array)
 {
-	int	maxLength;
-	int	currentLength;
+	int	max_length;
+	int	current_length;
 
 	if (array == NULL || *array == NULL)
 	{
 		return (-1);
 	}
-	maxLength = 0;
+	max_length = 0;
 	while (*array != NULL)
 	{
-		currentLength = ft_strlen(*array);
-		if (currentLength > maxLength)
+		current_length = ft_strlen(*array);
+		if (current_length > max_length)
 		{
-			maxLength = currentLength;
+			max_length = current_length;
 		}
 		array++;
 	}
-	return (maxLength);
+	return (max_length);
 }
 
 size_t	ft_2darr_len(char **arr)

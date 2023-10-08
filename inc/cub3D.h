@@ -10,12 +10,14 @@
 # include <string.h>
 # include <unistd.h>
 
-# define VIEW_HEIGHT 720
-# define VIEW_WIDTH 1280
+//720 x 1280
+# define VIEW_HEIGHT 1080
+# define VIEW_WIDTH 1920
 # define MIN_SPEED 0.03
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
 # define MAX_ROT_SPEED 3
+# define SENSIBILITY 0.08
 # define HITBOX 0.35
 # define FPS 60
 
@@ -30,12 +32,12 @@ typedef struct s_raycast
 	double			delta_dist_y;
 	double			side_dist_x;
 	double			side_dist_y;
-	double			perpWallDist;
-	double			wallX;
-	int				lineHeight;
-	int				drawStart;
-	int				drawEnd;
-	int				texNum;
+	double			perp_wall;
+	double			wall_x;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_num;
 	int				tex_x;
 	int				tex_y;
 	int				map_x;
@@ -44,7 +46,7 @@ typedef struct s_raycast
 	int				step_y;
 	int				hit;
 	int				side;
-	uint8_t		*color;
+	uint8_t			*color;
 	uint32_t		new_color;
 }					t_raycast;
 
@@ -88,6 +90,7 @@ typedef struct s_global
 	int				**final_map;
 	char			**flood_map;
 	bool			reached;
+	bool			focus;
 	t_parsing		parsing;
 	mlx_t			*mlx;
 	mlx_texture_t	*texture[4];
@@ -104,7 +107,7 @@ typedef struct s_global
 // --------UTILS--------//
 //----------------------//
 int					find_longest_line(char **array);
-void				ft_exit_free(char *s);
+void				ft_exit_free(char *s, int fd);
 void				free_all(void);
 void				ft_2darr_print(char **tb, int fd);
 void				ft_2darr_free(char **tb);
@@ -159,14 +162,15 @@ void				player_movement(void);
 void				player_rotation(void);
 void				load_init_texture(void);
 void				raycast(t_player player, mlx_image_t *image);
-void				change_player_dir(t_player *player, char c);
+void				change_player_dir(char c);
 void				set_background(mlx_image_t *image, uint32_t floor_color,
 						uint32_t roof_color);
 void				rotate_view(double theta);
-void	cal_side_dist_x(t_player *player, t_raycast	*raycast);
-void	cal_side_dist_y(t_player *player, t_raycast	*raycast);
-void	dda(t_global *gl, t_raycast	*raycast);
-void	wall_height(t_player *player, t_raycast	*raycast);
-void	calum_dist(t_raycast *raycast);
+void				cal_side_dist_x(t_player *player, t_raycast *raycast);
+void				cal_side_dist_y(t_player *player, t_raycast *raycast);
+void				dda(t_global *gl, t_raycast *raycast);
+void				wall_height(t_player *player, t_raycast *raycast);
+void				calum_dist(t_raycast *raycast);
+void				mouse_view_rotation(double xpos, double ypos, void *param);
 
 #endif

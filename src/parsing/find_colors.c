@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouture <acouture@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:52:51 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/06 14:52:52 by acouture         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:09:07 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ uint32_t	rgba_to_store(char *color_string)
 	i = 0;
 	split = ft_split(color_string, ',');
 	if (ft_2darr_len(split) != 3)
-		ft_exit_free("Wrong RGBA format\n");
+		ft_exit_free("Wrong RGBA format\n", 2);
 	while (split[i])
 	{
 		if (check_number(split[i]) != 0)
-			ft_exit_free("Wrong number format\n");
+			ft_exit_free("Wrong number format\n", 2);
 		colors_split[i] = ft_atoi(split[i]);
 		if (colors_split[i] > 255 || colors_split[i] < 0)
-			ft_exit_free("RGBA ranges 0-255\n");
+			ft_exit_free("RGBA ranges 0-255\n", 2);
 		i++;
 	}
 	result = create_rgba(colors_split[0], colors_split[1], colors_split[2],

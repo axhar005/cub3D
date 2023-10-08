@@ -8,14 +8,14 @@ void	valid_texture(void)
 	while (i < 4)
 	{
 		if (!g()->texture[i])
-			ft_exit("texture not found ! (ft_exit_free needed)");
+			ft_exit_free("texture not found !", 2);
 		i++;
 	}
 }
 
 void	load_init_texture(void)
 {
-	t_global *gl;
+	t_global	*gl;
 
 	gl = g();
 	g()->texture[0] = mlx_load_png(gl->parsing.north);

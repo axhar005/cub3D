@@ -1,4 +1,3 @@
-
 #include "../../inc/cub3D.h"
 
 void	rotate_view(double theta)
@@ -35,6 +34,16 @@ void	player_rotation(void)
 	}
 }
 
+void	mouse_view_rotation(double xpos, double ypos, void *param)
+{
+	static double	prev_x = 0;
+
+	(void)ypos;
+	(void)param;
+	rotate_view(((prev_x - xpos) * (M_PI / 180.0)) * SENSIBILITY);
+	prev_x = xpos;
+}
+
 static void	set_player_dir(double dir_x, double dir_y, double plane_x,
 		double plane_y)
 {
@@ -44,21 +53,14 @@ static void	set_player_dir(double dir_x, double dir_y, double plane_x,
 	g()->player.plane_y = plane_y;
 }
 
-void	change_player_dir(t_player *player, char c)
+void	change_player_dir(char c)
 {
-	static bool	first = true;
-
-	(void)player;
-	if (first == true)
-	{
-		if (c == 'E')
-			set_player_dir(0, 1, 0.66, 0);
-		else if (c == 'N')
-			set_player_dir(-1, 0, 0, 0.66);
-		else if (c == 'S')
-			set_player_dir(1, 0, 0, -0.66);
-		else
-			set_player_dir(0, -1, -0.66, 0);
-		first = false;
-	}
+	if (c == 'E')
+		set_player_dir(0, 1, 1, 0);
+	else if (c == 'N')
+		set_player_dir(-1, 0, 0, 0.85);
+	else if (c == 'S')
+		set_player_dir(1, 0, 0, -1);
+	else
+		set_player_dir(0, -1, -1, 0);
 }

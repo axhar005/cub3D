@@ -11,7 +11,7 @@ LIBFT = libft.a
 
 #--- COMMAND VARIABLES ---#
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Ofast #-g -fsanitize=address
 RM = rm -f
 AR = ar rcs
 MK = mkdir -p

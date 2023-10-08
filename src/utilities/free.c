@@ -1,5 +1,22 @@
 #include "../inc/cub3D.h"
 
+static void	ft_free_texture(t_global *gl)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (gl->texture[i])
+			mlx_delete_texture(gl->texture[i]);
+		i++;
+	}
+	if (gl->image)
+		mlx_delete_image(gl->mlx, gl->image);
+	if (gl->background)
+		mlx_delete_image(gl->mlx, gl->background);
+}
+
 void	ft_2dint_free(int **tab)
 {
 	int	i;
@@ -11,12 +28,11 @@ void	ft_2dint_free(int **tab)
 	size = g()->parsing.final_map_size;
 	while (i < size)
 	{
-		free(tab[i]);  // Free each sub-array (row)
+		free(tab[i]);
 		i++;
 	}
-	free(tab);  // Free the array holding the pointers
+	free(tab);
 }
-
 
 void	ft_2darr_free(char **tab)
 {
@@ -51,12 +67,13 @@ void	free_all(void)
 		free(g()->parsing.west);
 	if (g()->parsing.south)
 		free(g()->parsing.south);
+	ft_free_texture(g());
 }
 
-void	ft_exit_free(char *s)
+void	ft_exit_free(char *s, int fd)
 {
 	free_all();
 	if (s)
-		ft_putstr_fd(s, 2);
+		ft_putstr_fd(s, fd);
 	exit(EXIT_FAILURE);
 }

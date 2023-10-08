@@ -1,4 +1,3 @@
-
 #include "../../inc/cub3D.h"
 
 void	set_background(mlx_image_t *image, uint32_t floor_color,
