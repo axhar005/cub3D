@@ -25,6 +25,7 @@ void	entry(void)
 	}
 }
 
+
 void	step(void *param)
 {
 	static double	frame;
@@ -60,7 +61,6 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		ft_exit("Wrong number of arguments");
 	check_extension(av[1]);
-	init_struct();
 	pars_file(av[1]);
 	change_player_dir(gl->parsing.player_dir);
 	gl->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
