@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 	check_extension(av[1]);
 	pars_file(av[1]);
 	change_player_dir(gl->parsing.player_dir);
-	gl->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Merci Chat", false);
+	gl->mlx = mlx_init(VIEW_WIDTH, VIEW_HEIGHT, "Cub3D", false);
 	gl->background = mlx_new_image(gl->mlx, VIEW_WIDTH, VIEW_HEIGHT);
 	gl->image = mlx_new_image(gl->mlx, VIEW_WIDTH, VIEW_HEIGHT);
 	mlx_image_to_window(gl->mlx, gl->background, 0, 0);
