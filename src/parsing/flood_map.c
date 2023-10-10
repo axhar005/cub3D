@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:53:05 by acouture          #+#    #+#             */
-/*   Updated: 2023/10/09 20:16:17 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/10 12:34:05 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	flood_fill(int y, int x, int map_width, int map_height)
 	if (y < 0 || y >= map_height || x < 0
 		|| x >= (int)ft_strlen(data->flood_map[y]))
 		ft_exit_free("Out of bounds\n", 2);
-	if (data->flood_map[y][x] == ' ')
-		ft_exit_free("Invalided char in map\n", 2);
 	if (data->flood_map[y][x] == 'X' || data->flood_map[y][x] == '1')
 		return ;
 	data->flood_map[y][x] = 'X';

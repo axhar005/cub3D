@@ -17,7 +17,7 @@
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
 # define MAX_ROT_SPEED 3
-# define SENSIBILITY 0.08
+# define SENSIBILITY 0.05
 # define HITBOX 0.35
 # define FPS 60
 
