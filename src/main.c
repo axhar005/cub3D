@@ -25,7 +25,6 @@ void	entry(void)
 	}
 }
 
-
 void	step(void *param)
 {
 	static double	frame;
@@ -38,6 +37,7 @@ void	step(void *param)
 	{
 		ft_bzero(gl->image->pixels, (VIEW_HEIGHT * VIEW_WIDTH) * sizeof(int));
 		raycast(gl->player, gl->image);
+		draw_minimap(&gl->minimap);
 	}
 	frame += gl->delta_time;
 	entry();
@@ -50,6 +50,15 @@ void	init(t_global *gl)
 	gl->player.pos_x = gl->parsing.player_pos.y + 0.5;
 	gl->player.pos_y = gl->parsing.player_pos.x + 0.5;
 	gl->player.move_speed = 0.03;
+	gl->minimap.pos_x = 10;
+	gl->minimap.pos_y = 10;
+	gl->minimap.width = 9;
+	gl->minimap.height = 5;
+	gl->minimap.slot_size = 32;
+	gl->minimap.wall_color = rgba_color(255, 255, 0, 255);
+	gl->minimap.floor_color = rgba_color(255, 0, 255, 255);
+	gl->minimap.player_color = rgba_color(255, 0, 0, 255);
+	gl->minimap.background_color = rgba_color(168, 128, 19, 255);
 	mlx_set_cursor_mode(gl->mlx, MLX_MOUSE_DISABLED);
 }
 

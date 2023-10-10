@@ -50,6 +50,19 @@ typedef struct s_raycast
 	uint32_t		new_color;
 }					t_raycast;
 
+typedef struct s_minimap
+{
+	int				pos_x;
+	int				pos_y;
+	int				width;
+	int				height;
+	int				slot_size;
+	uint32_t		wall_color;
+	uint32_t		floor_color;
+	uint32_t		player_color;
+	uint32_t		background_color;
+}					t_minimap;
+
 typedef struct s_player
 {
 	double			pos_x;
@@ -99,6 +112,7 @@ typedef struct s_global
 	t_player		player;
 	double			delta_time;
 	t_raycast		raycast;
+	t_minimap		minimap;
 }					t_global;
 
 // prototype
@@ -172,5 +186,8 @@ void				dda(t_global *gl, t_raycast *raycast);
 void				wall_height(t_player *player, t_raycast *raycast);
 void				calum_dist(t_raycast *raycast);
 void				mouse_view_rotation(double xpos, double ypos, void *param);
+void				draw_minimap(t_minimap *minimap);
+uint32_t			rgba_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+void				draw_pixel_square(t_pos pos, t_pos size, uint32_t color);
 
 #endif
