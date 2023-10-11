@@ -49,7 +49,8 @@ SRC		= 	main.c \
 			graphics/pixel.c \
 			graphics/movement.c \
 			graphics/view.c \
-			graphics/draw.c
+			graphics/draw.c \
+			graphics/key.c
 VPATH	=	$(SRCDIR)
 
 #--- OBJECT ---#

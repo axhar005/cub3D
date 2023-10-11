@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:45:50 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 11:45:52 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:18:26 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,27 @@ t_global	*g(void)
 
 void	entry(void)
 {
-	static bool	tab = false;
+	bool	tab; 
 
+	tab = g()->tab;
 	if (mlx_is_key_down(g()->mlx, MLX_KEY_ESCAPE))
 		ft_exit_free("", 1);
-	if (tab == false && mlx_is_key_down(g()->mlx, MLX_KEY_TAB))
+	if (tab == false && is_key_pressed(MLX_KEY_TAB))
 	{
 		mlx_set_cursor_mode(g()->mlx, MLX_MOUSE_NORMAL);
 		tab = true;
 	}
-	else if (tab == true && mlx_is_key_down(g()->mlx, MLX_KEY_TAB))
+	else if (tab == true && is_key_pressed(MLX_KEY_TAB))
 	{
 		mlx_set_cursor_mode(g()->mlx, MLX_MOUSE_DISABLED);
 		tab = false;
 	}
+	else if (tab == true && mlx_is_mouse_down(g()->mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		mlx_set_cursor_mode(g()->mlx, MLX_MOUSE_DISABLED);
+		tab = false;
+	}
+	g()->tab = tab;
 }
 
 void	step(void *param)
@@ -55,8 +62,11 @@ void	step(void *param)
 	}
 	frame += gl->delta_time;
 	entry();
-	player_rotation();
-	player_movement();
+	if (g()->tab == false)
+	{
+		player_rotation();
+		player_movement();
+	}
 }
 
 void	init(t_global *gl)

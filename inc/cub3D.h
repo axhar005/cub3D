@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:48:01 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 11:48:03 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:05:18 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_global
 	int				**final_map;
 	char			**flood_map;
 	bool			reached;
-	bool			focus;
+	bool			tab;
 	t_parsing		parsing;
 	mlx_t			*mlx;
 	mlx_texture_t	*texture[4];
@@ -186,22 +186,27 @@ int					open_file(char *file);
 //----------------------//
 // -------GRAPHICS------//
 //----------------------//
+// texture
+void				load_init_texture(void);
+// movement / view
 void				player_movement(void);
 void				player_rotation(void);
-void				load_init_texture(void);
-void				raycast(t_player player, mlx_image_t *image);
 void				change_player_dir(char c);
-void				set_background(mlx_image_t *image, uint32_t floor_color,
-						uint32_t roof_color);
 void				rotate_view(double theta);
+void				mouse_view_rotation(double xpos, double ypos, void *param);
+// raycast
+void				raycast(t_player player, mlx_image_t *image);
 void				cal_side_dist_x(t_player *player, t_raycast *raycast);
 void				cal_side_dist_y(t_player *player, t_raycast *raycast);
 void				dda(t_global *gl, t_raycast *raycast);
 void				wall_height(t_player *player, t_raycast *raycast);
 void				calum_dist(t_raycast *raycast);
-void				mouse_view_rotation(double xpos, double ypos, void *param);
-void				draw_minimap(t_minimap *minimap);
+// draw / key
 uint32_t			rgba_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 void				draw_cross(int x_center, int y_center, uint32_t color);
+void				draw_minimap(t_minimap *minimap);
+bool				is_key_pressed(keys_t key);
+void				set_background(mlx_image_t *image, uint32_t floor_color,
+						uint32_t roof_color);
 
 #endif

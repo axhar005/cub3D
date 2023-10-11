@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:47:20 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 11:47:22 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:05:31 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,11 @@ void	mouse_view_rotation(double xpos, double ypos, void *param)
 
 	(void)ypos;
 	(void)param;
-	rotate_view(((prev_x - xpos) * (M_PI / 180.0)) * SENSIBILITY);
-	prev_x = xpos;
+	if (g()->tab == false)
+	{
+		rotate_view(((prev_x - xpos) * (M_PI / 180.0)) * SENSIBILITY);
+		prev_x = xpos;
+	}
 }
 
 static void	set_player_dir(double dir_x, double dir_y, double plane_x,
