@@ -188,6 +188,5 @@ void				calum_dist(t_raycast *raycast);
 void				mouse_view_rotation(double xpos, double ypos, void *param);
 void				draw_minimap(t_minimap *minimap);
 uint32_t			rgba_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-void				draw_pixel_square(t_pos pos, t_pos size, uint32_t color);
 
 #endif

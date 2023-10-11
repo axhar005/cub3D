@@ -57,7 +57,7 @@ void	init(t_global *gl)
 	gl->minimap.slot_size = 32;
 	gl->minimap.wall_color = rgba_color(72, 61, 139, 255);
 	gl->minimap.floor_color = rgba_color(60, 179, 113, 255);
-	gl->minimap.player_color = rgba_color(255, 0, 0, 255);
+	gl->minimap.player_color = rgba_color(255, 99, 71, 255);
 	gl->minimap.background_color = rgba_color(34, 34, 34, 255);
 	mlx_set_cursor_mode(gl->mlx, MLX_MOUSE_DISABLED);
 }
