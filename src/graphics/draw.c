@@ -1,5 +1,45 @@
 #include "../../inc/cub3D.h"
 
+static void	draw_thick_line(t_pos start, t_pos end, uint32_t color)
+{
+	int	offset;
+	int	x;
+	int	y;
+
+	offset = CROSSHAIR_THICK / 2;
+	if (start.x == end.x)
+	{
+		y = start.y;
+		while (y <= end.y)
+		{
+			x = start.x - offset;
+			while (x <= start.x + offset)
+				mlx_put_pixel(g()->image, x++, y++, color);
+		}
+	}
+	else if (start.y == end.y)
+	{
+		x = start.x;
+		while (x <= end.x)
+		{
+			y = start.y - offset;
+			while (y <= start.y + offset)
+				mlx_put_pixel(g()->image, x++, y++, color);
+		}
+	}
+}
+
+void	draw_cross(int x_center, int y_center, uint32_t color)
+{
+	int	half;
+
+	half = CROSSHAIR_LEN / 2;
+	draw_thick_line((t_pos){x_center, y_center - half}, (t_pos){x_center,
+		y_center + half}, color);
+	draw_thick_line((t_pos){x_center - half, y_center}, (t_pos){x_center + half,
+		y_center}, color);
+}
+
 void	draw_pixel_square(t_pos pos, t_pos size, uint32_t color)
 {
 	int	x;

@@ -38,6 +38,8 @@ void	step(void *param)
 		ft_bzero(gl->image->pixels, (VIEW_HEIGHT * VIEW_WIDTH) * sizeof(int));
 		raycast(gl->player, gl->image);
 		draw_minimap(&gl->minimap);
+		draw_cross(VIEW_WIDTH / 2, VIEW_HEIGHT / 2,
+			rgba_color(255, 255, 255, 255));
 	}
 	frame += gl->delta_time;
 	entry();
