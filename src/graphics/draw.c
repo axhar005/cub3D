@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:46:03 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 11:46:05 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 21:09:53 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@ static void	draw_thick_line(t_pos start, t_pos end, uint32_t color)
 	offset = CROSSHAIR_THICK / 2;
 	if (start.x == end.x)
 	{
-		y = start.y;
-		while (y <= end.y)
+		y = start.y - 1;
+		while (++y <= end.y)
 		{
 			x = start.x - offset;
 			while (x <= start.x + offset)
-				mlx_put_pixel(g()->image, x++, y++, color);
+				mlx_put_pixel(g()->image, x++, y, color);
 		}
 	}
 	else if (start.y == end.y)
 	{
-		x = start.x;
-		while (x <= end.x)
+		x = start.x - 1;
+		while (++x <= end.x)
 		{
 			y = start.y - offset;
 			while (y <= start.y + offset)
-				mlx_put_pixel(g()->image, x++, y++, color);
+				mlx_put_pixel(g()->image, x, y++, color);
 		}
 	}
 }

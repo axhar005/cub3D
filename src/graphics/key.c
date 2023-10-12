@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:09:58 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 12:10:00 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 16:04:50 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,3 +63,18 @@ bool	is_key_pressed(keys_t key)
 	}
 	return (false);
 }
+// void	open_door(t_global *gl)
+// {
+// 	double	checkradius;
+// 	checkradius = 1.2;
+// 	if (gl->final_map[(int)(gl->player.pos_x + 
+//		gl->raycast.ray_dir_x * checkradius)]
+// 		[(int)gl->player.pos_y] == 1)
+// 		gl->final_map[(int)(gl->player.pos_x + 
+//		gl->raycast.ray_dir_x * checkradius)]
+// 		[(int)gl->player.pos_y] = 0;
+// 	if (gl->final_map[(int)gl->raycast.ray_dir_x][(int)(gl->player.pos_y
+// 		+ gl->raycast.ray_dir_y * checkradius)] == 1)
+// 		gl->final_map[(int)gl->player.pos_x][(int)(gl->player.pos_y
+// 				+ gl->raycast.ray_dir_y * checkradius)] = 0;
+// }

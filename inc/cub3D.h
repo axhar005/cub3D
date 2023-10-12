@@ -6,7 +6,7 @@
 /*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:48:01 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 12:05:18 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:55:00 by oboucher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # define SENSIBILITY 0.05
 # define HITBOX 0.35
 # define FPS 60
-# define CROSSHAIR_LEN 10
-# define CROSSHAIR_THICK 1
+# define CROSSHAIR_LEN 30
+# define CROSSHAIR_THICK 10
 
 // struct
 

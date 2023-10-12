@@ -1,6 +1,6 @@
-NO ./asset/stone.png
 SO ./asset/wall.png
 WE ./asset/Stones_Texture.png
+NO ./asset/stone.png
 EA ./asset/Brickwall6_Texture.png
 F 153,76,0
 C 32,32,32

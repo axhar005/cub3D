@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "cub3d.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/Users/oboucher/Project/cub3D/lib/MLX42_"
 }
