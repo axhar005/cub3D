@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olivierboucher <olivierboucher@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:46:03 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 21:09:53 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/12 09:37:42 by olivierbouc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,11 @@ void	draw_minimap(t_minimap *map)
 {
 	int	x;
 	int	y;
-	int	cam_x;
-	int	cam_y;
 
 	draw_pixel_square((t_pos){map->pos_x - 5, map->pos_y - 5},
 		(t_pos){map->slot_size * map->width + 10, map->slot_size
 		* map->height + 10},
 		map->background_color);
-	cam_x = (int)g()->player.pos_y - map->width / 2;
-	cam_y = (int)g()->player.pos_x - map->height / 2;
 	y = 0;
 	while (y < map->height)
 	{

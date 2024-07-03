@@ -20,7 +20,7 @@ MK = mkdir -p
 MLXDIR = lib/MLX42_/build/
 MLXA = libmlx42.a
 MLX = $(MLXDIR)$(MLXA)
-MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" #"/usr/local/opt/glfw/lib"
+MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/usr/local/opt/glfw/lib"#"/Users/$(USER)/.brew/opt/glfw/lib/"
 
 #--- COLORS ---#
 GREEN	=	\033[1;32m

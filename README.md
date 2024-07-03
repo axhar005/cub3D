@@ -2,6 +2,10 @@
 
 ## Overview
 
+
+<img src="https://imgur.com/SCUimh3.gif" alt="visualizer image" width="800">
+
+
 `cub3D` is a 3D graphical engine inspired by the classic game Wolfenstein 3D. It's built using C and the MLX graphics library. This project serves as a fun and educational way to explore the fundamentals of computer graphics.
 
 ## Features
@@ -14,7 +18,7 @@
 ## Prerequisites
 
 - GCC Compiler
-- MLX
+- MLX42
 
 ## Installation
 
@@ -25,7 +29,6 @@ git clone https://github.com/demenciel/cub3D.git
 ```
 make
 ```
-
 
 ## Usage
 
@@ -41,32 +44,23 @@ or
 make run
 ```
 
-## Code Organization
+## Map exemple
 
-- **src/**: Contains the source code files for the main functionality.
-  - **src/parsing/**: Contains the code for the parsing of the map file.
-    - `final_map.c`: Creates a map `2d int array`, to be passed to the MLX.
-    - `find_colors.c`: Parse the input file to get the RGBA colors.
-    - `find_nswe.c`: Parse the input file to get the textures sources.
-    - `find_width_height.c`: Functions to get the actual size of the map.
-    - `flood_map.c`: A flood fill implementation to check if the map is valid.
-    - `open_read.c`: Create a copy of the content of the input file.
+```
+NO ./asset/stone.png
+SO ./asset/wall.png
+WE ./asset/Stones_Texture.png
+EA ./asset/Brickwall6_Texture.png
+F 153,76,0
+C 32,32,32
 
-- **inc/**: Header files and global variable declarations.
-
-- **lib/libft**: A custom library `libft` of basic C functions.
-
-- **assets/**: Textures, sprites, and other graphical assets.
-
-- **maps/**: Game map files in `.cub` format.
-
-- **Makefile**: Script for compiling the project.
-
+11111111111
+1000 000001
+1N000100001
+10000100001
+11111111111
+```
 
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

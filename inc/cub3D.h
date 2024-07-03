@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oboucher <oboucher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: olivierboucher <olivierboucher@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:48:01 by oboucher          #+#    #+#             */
-/*   Updated: 2023/10/11 20:55:00 by oboucher         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:50:51 by olivierbouc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <unistd.h>
 
 //720 x 1280
-# define VIEW_HEIGHT 1080
-# define VIEW_WIDTH 1920
+# define VIEW_HEIGHT 720
+# define VIEW_WIDTH 1280
 # define MIN_SPEED 0.03
 # define MAX_SPEED 0.08
 # define MIN_ROT_SPEED 2
@@ -32,8 +32,8 @@
 # define SENSIBILITY 0.05
 # define HITBOX 0.35
 # define FPS 60
-# define CROSSHAIR_LEN 30
-# define CROSSHAIR_THICK 10
+# define CROSSHAIR_LEN 50
+# define CROSSHAIR_THICK 1
 
 // struct
 
